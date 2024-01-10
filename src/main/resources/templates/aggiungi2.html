@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="ISO-8859-1">
+  <title>aggiungi2</title>
+  <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.js"></script>
+  <script type="text/javascript" th:src="@{/src/cassa.js}"></script>
+  <script type="text/javascript" th:src="@{/src/scripts.js}"></script>
+  <script type="text/javascript" th:src="@{/src/app2.js}"></script>
+<!--  <script src="/webjars/sockjs-client/sockjs.min.js"></script>-->
+<!--  <script src="/webjars/stomp-websocket/stomp.min.js"></script>-->
+<!--  <script src="../static/src/app.js"></script>-->
+</head>
+<body>
+Nascondi menu <input type="checkBox" onchange="HideMenu()"/>
+<div id="menu">
+    <input type="text" id="nome" name="nomeTav"/> <br/>
+    <input type="number" id="num" name="numTav"/> <br/>
+    <input type="number" id="persone" name="persTav"/> <br/>
+    <select name="cameriere" id="cameriere">
+      <option th:each="c:${camerieri}" th:text="${c}" th:value="${c}"></option>
+    </select>
+    <div th:each="piatto:${piatti}">
+        <input type="text" readonly th:value="${piatto}" style="border:none;">
+        <input type="checkbox" th:id="${piatto}" onchange="prova(this.id)"/>
+        <input type="number" th:id="'quanta'+${piatto}" name="pasta" style="visibility:hidden"/>
+    </div>
+
+<!--    Pasta <input type="checkbox" id="Pasta" onchange="prova(this.id)"/>-->
+<!--    <input type="number" id="quantaPasta" name="pasta" style="visibility:hidden"/> <br/>-->
+<!--    Carne <input type="checkbox" id="Carne" onchange="prova(this.id)"/>-->
+<!--    <input type="number" id="quantaCarne" name="carne" style="visibility:hidden"/> <br/>-->
+   <button id="sendMessage" onclick="sendPrivateMessage();">Send</button>
+</div>
+<div>
+    Stampa ordini in corso: <button id="request" onclick="sendPrivateMessage2();">Print</button>
+</div>
+<div id="messages"></div>
+</body>
+</html>
