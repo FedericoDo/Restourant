@@ -38,11 +38,15 @@ public class SecurityConfig {
                 .roles("USER")
                 .build();
         UserDetails user = User.withDefaultPasswordEncoder()
-                .username("test")
-                .password("test")
+                .username("primi")
+                .password("primi")
                 .roles("USER")
                 .build();
-
-        return new InMemoryUserDetailsManager(user,user1,user2);
+        UserDetails user3 = User.withDefaultPasswordEncoder()
+                .username("secondi")
+                .password("secondi")
+                .roles("USER")
+                .build();
+        return new InMemoryUserDetailsManager(user,user1,user2,user3);
     }
 }

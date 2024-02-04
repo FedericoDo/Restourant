@@ -41,11 +41,9 @@ function show(message) {
         response = document.getElementById('tabella');
         var row = response.insertRow(0);
         row.id= message.nomeTavolo +"--"+message.cameriere;
-        let persone=row.insertCell(0);
-        let tavolo=row.insertCell(1);
-        let nome=row.insertCell(2);
-        let piatti=row.insertCell(3);
-        persone.innerHTML=message.persone;
+        let tavolo=row.insertCell(0);
+        let nome=row.insertCell(1);
+        let piatti=row.insertCell(2);
         tavolo.innerHTML=message.numeroTavolo;
         nome.innerHTML=message.nomeTavolo;
         piatti.innerHTML="<table id='piatti'></table>";
@@ -57,20 +55,5 @@ function show(message) {
             nomePiatto.innerHTML=message.piatti[o].nome;
             quantità.innerHTML=message.piatti[o].quantity;
         }
-    }else if(message.valore != null){
-        response = document.getElementById('messages');
-        response.innerHTML = message.valore;
-    }else{
-        response = document.getElementById('messages');
-        response.innerHTML = "<div id= ordiniAttivi>";
-        for(let i = 0; i< message.length; i++){
-            response.innerHTML += "nome: "+ message[i].nomeTavolo + " numero: " +message[i].numeroTavolo
-                + " persone: " + message[i].persone+" cameriere: "+message[i].cameriere +" piatti: <br/>" ;
-            for( let o = 0; o<message[i].piatti.length; o++){
-                response.innerHTML += message[i].piatti[o].nome + ": "+message[i].piatti[o].quantity+"<br/>";
-            }
-            response.innerHTML += "<br/><br/>";
-        }
-        response.innerHTML +="</div>";
     }
 }

@@ -21,9 +21,9 @@
 <body>
 Nascondi menu <input type="checkBox" onchange="HideMenu()"/>
 <div id="menu">
-    <input type="text" id="nome" name="nomeTav"/> <br/>
-    <input type="number" id="num" name="numTav"/> <br/>
-    <input type="number" id="persone" name="persTav"/> <br/>
+    Nome:<input type="text" id="nome" name="nomeTav"/> <br/>
+    Numero Tavolo:<input type="number" id="num" name="numTav"/> <br/>
+    Numero Persone:<input type="number" id="persone" name="persTav"/> <br/>
     <select name="cameriere" id="cameriere">
       <option th:each="c:${camerieri}" th:text="${c}" th:value="${c}"></option>
     </select>
