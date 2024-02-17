@@ -20,16 +20,23 @@ function sendPrivateMessage() {
     var cameriere = document.getElementById('cameriere').value;
     var pasta = document.getElementById('quantapasta').value;
     document.getElementById('quantapasta').value='';
+    var notepasta = document.getElementById('notepasta').value;
+    document.getElementById('notepasta').value='';
     var dolce = document.getElementById('quantadolce').value;
     document.getElementById('quantadolce').value='';
+    var notedolce = document.getElementById('notedolce').value;
+    document.getElementById('notedolce').value='';
     var carne = document.getElementById('quantacarne').value;
     document.getElementById('quantacarne').value='';
+    var notecarne = document.getElementById('notecarne').value;
+    document.getElementById('notecarne').value='';
 
     // var elementi = document.querySelectorAll('input[type="number"]')
 
     privateStompClient.send("/app/private", {},
         JSON.stringify({'nomeTav':nome,'numTav':num, 'persTav':persone,
-        'cameriere':cameriere, 'pasta':pasta, 'carne':carne, 'dolce':dolce}));
+        'cameriere':cameriere, 'pasta':pasta, 'carne':carne, 'dolce':dolce,
+        'notepasta':notepasta, 'notedolce':notedolce, 'notecarne':notecarne}));
 }
 function sendPrivateMessage2() {
     privateStompClient.send("/app/print", {},"stampa");
@@ -54,8 +61,10 @@ function show(message) {
             row=temp.insertRow(0);
             let nomePiatto=row.insertCell(0);
             let quantità=row.insertCell(1);
+            let note=row.insertCell(2);
             nomePiatto.innerHTML=message.piatti[o].nome;
             quantità.innerHTML=message.piatti[o].quantity;
+            note.innerHTML=message.piatti[o].note;
         }
     }else if(message.valore != null){
         response = document.getElementById('messages');

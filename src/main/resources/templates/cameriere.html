@@ -11,19 +11,19 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.js"></script>
   <script type="text/javascript" th:src="@{/src/scripts.js}"></script>
-  <script type="text/javascript" th:src="@{/src/app3.js}"></script>
+  <script type="text/javascript" th:src="@{/src/app2.js}"></script>
 
 
 
 </head>
 <body>
 <div class="container my-2" align="center">
-  <div id="reparto" th:text="${dati.getNome()}"></div>
-
+  <div id="cameriere" th:text="${dati.getNome()}"></div>
   <table style="width:80%" border="1"
          class = "table table-striped table-responsive-md"
          id="tabella">
       <tr th:each="ordine:${dati.getOrdini()}">
+        <td th:text="${ordine.getPersone()}"></td>
         <td th:text="${ordine.getNumeroTavolo()}"></td>
         <td th:text="${ordine.getNomeTavolo()}"></td>
         <td>
@@ -31,6 +31,7 @@
             <tr th:each="piatti:${ordine.getOrdine()}">
             <td th:text="${piatti.getNome()}"></td>
             <td th:text="${piatti.getQuantity()}"></td>
+            <td th:text="${piatti.getNote()}"></td>
             </tr>
           </table>
         </td>

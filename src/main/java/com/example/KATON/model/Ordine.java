@@ -1,6 +1,7 @@
 package com.example.KATON.model;
 
 import jakarta.persistence.*;
+import lombok.ToString;
 import org.hibernate.annotations.ManyToAny;
 
 import java.util.ArrayList;
@@ -23,6 +24,8 @@ public class Ordine {
 	@OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
 	private List<Piatto> piatti;
 
+	private String servitore;
+
 
 	public int getNumeroTavolo() {
 		return numeroTavolo;
@@ -30,6 +33,14 @@ public class Ordine {
 
 	public void setNumeroTavolo(int tavolo) {
 		this.numeroTavolo = tavolo;
+	}
+
+	public String getServitore() {
+		return servitore;
+	}
+
+	public void setServitore(String s) {
+		this.servitore = s;
 	}
 
 	public String getNomeTavolo() {

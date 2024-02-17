@@ -30,7 +30,9 @@ Nascondi menu <input type="checkBox" onchange="HideMenu()"/>
     <div th:each="piatto:${piatti}">
         <input type="text" readonly th:value="${piatto}" style="border:none;">
         <input type="checkbox" th:id="${piatto}" onchange="prova(this.id)"/>
-        <input type="number" th:id="'quanta'+${piatto}" name="pasta" style="visibility:hidden"/>
+        <input type="number" th:id="'quanta'+${piatto}" style="visibility:hidden"/>
+        <input type="checkbox" th:id="${piatto}" onchange="note(this.id)"/>
+        <input type="text" th:id="'note'+${piatto}" style="visibility:hidden"/>
     </div>
 
 <!--    Pasta <input type="checkbox" id="Pasta" onchange="prova(this.id)"/>-->

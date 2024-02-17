@@ -43,17 +43,21 @@ function show(message) {
         row.id= message.nomeTavolo +"--"+message.cameriere;
         let tavolo=row.insertCell(0);
         let nome=row.insertCell(1);
-        let piatti=row.insertCell(2);
+        let cameriere=row.insertCell(2);
+        let piatti=row.insertCell(3);
         tavolo.innerHTML=message.numeroTavolo;
         nome.innerHTML=message.nomeTavolo;
         piatti.innerHTML="<table id='piatti'></table>";
+        cameriere.innerHTML=message.cameriere;
         const temp = document.getElementById("piatti");
         for( let o = 0; o<message.piatti.length; o++){
             row=temp.insertRow(0);
             let nomePiatto=row.insertCell(0);
             let quantità=row.insertCell(1);
+            let note=row.insertCell(2);
             nomePiatto.innerHTML=message.piatti[o].nome;
             quantità.innerHTML=message.piatti[o].quantity;
+            note.innerHTML=message.piatti[o].note;
         }
     }
 }

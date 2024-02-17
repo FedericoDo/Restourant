@@ -1,6 +1,7 @@
 package com.example.KATON.model;
 
 import jakarta.persistence.*;
+import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,13 +9,14 @@ import java.util.List;
 
 @Entity
 @Table(name="cameriere")
+@ToString
 public class Cameriere {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
     @OneToMany(mappedBy = "cameriere", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<Ordine> ordini= new ArrayList<>();
+    private List<Ordine> ordini;
 
 
 

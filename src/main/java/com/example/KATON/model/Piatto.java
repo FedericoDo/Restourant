@@ -14,14 +14,16 @@ public class Piatto  {
     private int quantity;
     private String nome;
     private double prezzo;
+    private String note;
     @Id
     @GeneratedValue
     private Long id;
 
-    public Piatto(String nome, int quantity, double price) {
+    public Piatto(String nome, int quantity, double price, String note) {
         this.nome = nome ;
         this.prezzo=price;
         this.quantity = quantity;
+        this.note = note;
     }
 
    /* public String[] getListaPiatti(){

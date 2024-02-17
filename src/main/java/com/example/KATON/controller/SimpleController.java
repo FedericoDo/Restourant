@@ -72,7 +72,7 @@ public class SimpleController {
         ordine.setNumeroTavolo(Integer.parseInt(allParams.get("numTav")));
         for(String g: prezzario.getTable().keySet()){
             if(!(allParams.get(g.toString().toLowerCase()).equals(""))||!(allParams.get(g.toString().toLowerCase()).isEmpty())) {
-                ordine.getPiatti().add(new Piatto(g.toString(),Integer.parseInt(allParams.get(g.toString().toLowerCase())),prezzario.priceOf(g)));
+                ordine.getPiatti().add(new Piatto(g.toString(),Integer.parseInt(allParams.get(g.toString().toLowerCase())),prezzario.priceOf(g),allParams.get("note"+g.toString().toLowerCase())));
             }
         }
         ordine.setCameriere(cameriere);
@@ -98,11 +98,12 @@ public class SimpleController {
             Ordine ordine1 = new Ordine();
             for(String c:piatti.get(d)) {
                 if((allParams.get(c)!=null) && (!(allParams.get(c.toString().toLowerCase()).equals("")))&& (!(allParams.get(c.toString().toLowerCase()).isEmpty()))) {
-                    ordine1.getPiatti().add(new Piatto(c, Integer.parseInt(allParams.get(c)), prezzario.priceOf(c)));
+                    ordine1.getPiatti().add(new Piatto(c, Integer.parseInt(allParams.get(c)), prezzario.priceOf(c), allParams.get("note"+c.toString().toLowerCase())));
                     Cameriere cameriere1 = cameriereRepository.getCameriereByNome(d);
                     ordine1.setNomeTavolo(allParams.get("nomeTav"));
                     ordine1.setNumeroTavolo(Integer.parseInt(allParams.get("numTav")));
-                    ordine1.setCameriere(cameriere);
+                    ordine1.setCameriere(cameriere1);
+                    ordine1.setServitore(cameriere.getNome());
                     cameriere1.getOrdini().add(ordine1);
                     cameriereRepository.save(cameriere1);
                 }
@@ -127,17 +128,18 @@ public class SimpleController {
     String register1(@RequestParam("nome") String name,Model model){
         for(String c: reparti){
             if(c.equals(name)){
-                if(cameriereRepository.getCameriereByNome(name) == null)
-                    cameriereRepository.save(new Cameriere(name,new ArrayList<Ordine>()));
-                model.addAttribute("dati", cameriereRepository.getCameriereByNome(name));
-                return "dato3";
+                if(cameriereRepository.getCameriereByNome(name) == null) {
+                    cameriereRepository.save(new Cameriere(name, new ArrayList<Ordine>()));
+                }
+                model.addAttribute("dati1", cameriereRepository.getCameriereByNome(name));
+                return "postazione";
             }
         }
         if(cameriereRepository.getCameriereByNome(name) == null)
             cameriereRepository.save(new Cameriere(name,new ArrayList<Ordine>()));
         model.addAttribute("dati", cameriereRepository.getCameriereByNome(name));
         privatemodel = model;
-        return "dato2";
+        return "cameriere";
     }
 
 
