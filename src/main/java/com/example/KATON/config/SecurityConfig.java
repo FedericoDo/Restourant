@@ -10,6 +10,27 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfig {
 
+    UserDetails user1 = User.withDefaultPasswordEncoder()
+            .username("diego")
+            .password("diego")
+            .roles("USER")
+            .build();
+    UserDetails user2 = User.withDefaultPasswordEncoder()
+            .username("cassa")
+            .password("cassa")
+            .roles("USER")
+            .build();
+    UserDetails user = User.withDefaultPasswordEncoder()
+            .username("primi")
+            .password("primi")
+            .roles("USER")
+            .build();
+    UserDetails user3 = User.withDefaultPasswordEncoder()
+            .username("secondi")
+            .password("secondi")
+            .roles("USER")
+            .build();
+    private InMemoryUserDetailsManager inMemoryUserDetailsManager = new InMemoryUserDetailsManager(user,user1,user2,user3);
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
@@ -25,7 +46,8 @@ public class SecurityConfig {
                 .logout( logout -> logout.logoutSuccessUrl("/"));
         return http.build();
     }
-    @Bean
+
+    /*@Bean
     public InMemoryUserDetailsManager userDetailsService() {
         UserDetails user1 = User.withDefaultPasswordEncoder()
                 .username("diego")
@@ -47,6 +69,12 @@ public class SecurityConfig {
                 .password("secondi")
                 .roles("USER")
                 .build();
-        return new InMemoryUserDetailsManager(user,user1,user2,user3);
+        inMemoryUserDetailsManager = new InMemoryUserDetailsManager(user,user1,user2,user3);
+        return inMemoryUserDetailsManager;
+    }*/
+
+    @Bean
+    public InMemoryUserDetailsManager getUserDetailsService() {
+        return inMemoryUserDetailsManager;
     }
 }

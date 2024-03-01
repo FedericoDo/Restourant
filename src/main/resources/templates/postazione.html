@@ -22,7 +22,13 @@
   <table style="width:80%" border="1"
          class = "table table-striped table-responsive-md"
          id="tabella">
-      <tr th:each="ordine:${dati1.getOrdini()}">
+    <tr>
+      <td>Numero Tavolo</td>
+      <td>Nome Tavolo</td>
+      <td>Cameriere</td>
+      <td>Ordine</td>
+    </tr>
+    <tr th:each="ordine:${dati1.getOrdini()}">
         <td th:text="${ordine.getNumeroTavolo()}"></td>
         <td th:text="${ordine.getNomeTavolo()}"></td>
         <td th:text="${ordine.getServitore()}"></td>

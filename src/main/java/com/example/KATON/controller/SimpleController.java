@@ -1,5 +1,6 @@
 package com.example.KATON.controller;
 
+import com.example.KATON.config.SecurityConfig;
 import com.example.KATON.model.*;
 import com.example.KATON.repository.CameriereRepository;
 import com.example.KATON.repository.DatiRepository;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +31,9 @@ public class SimpleController {
     private OrdineRepository ordineRepository;
     @Autowired
     private SimpMessagingTemplate simpMessagingTemplate;
+
+    @Autowired
+    private SecurityConfig securityConfig;
 
     private Model privatemodel;
 
@@ -63,6 +68,10 @@ public class SimpleController {
         privatemodel = model;
         return "aggiungi2";
     }
+    @GetMapping("/registra")
+    public String registraPage(Model model){
+        return "registra";
+    }
     @MessageMapping("/private")
     public void SendToUser(@Payload Map<String,String> allParams){
         Ordine ordine = new Ordine();
@@ -86,7 +95,7 @@ public class SimpleController {
             tot+=p.getPrezzo()*p.getQuantity();
         }
         DecimalFormat df = new DecimalFormat("#.##");
-        StringWrapper message =new StringWrapper("totale: "+df.format(tot).toString()+"€");
+        StringWrapper message = new StringWrapper("totale: "+df.format(tot).toString()+"€");
         simpMessagingTemplate.convertAndSendToUser("cassa", "/specific", message);
         //TODO: MODIFICA QUANDO AVRAI MENU
 
@@ -110,6 +119,22 @@ public class SimpleController {
             }
             if(ordine1.getPiatti().size()>0)
                 simpMessagingTemplate.convertAndSendToUser(d, "/specific", new Ordine1(ordine1));
+        }
+    }
+
+    @MessageMapping("/registra")
+    public void Registra(@Payload Map<String,String> allParams){
+        if(securityConfig.getUserDetailsService().userExists(allParams.get("username"))){
+            StringWrapper message = new StringWrapper("registrazione non avvenuta per "+allParams.get("username")+", nome già in uso");
+            simpMessagingTemplate.convertAndSendToUser("cassa", "/specific", message);
+        }else{
+            securityConfig.getUserDetailsService().createUser(User.withDefaultPasswordEncoder()
+                    .username(allParams.get("username"))
+                    .password(allParams.get("password"))
+                    .roles("USER")
+                    .build());
+            StringWrapper message = new StringWrapper("registrazione avvenuta con successo per "+allParams.get("username"));
+            simpMessagingTemplate.convertAndSendToUser("cassa", "/specific", message);
         }
     }
     @MessageMapping("/print")
