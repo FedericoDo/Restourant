@@ -3,10 +3,6 @@
 <head>
   <meta charset="ISO-8859-1">
   <title>Dato</title>
-  <link rel="stylesheet"
-        href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-        crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.js"></script>
@@ -19,20 +15,20 @@
 <body>
 <div class="container my-2" align="center">
   <div id="cameriere" th:text="${dati.getNome()}"></div>
-  <table style="width:80%" border="1"
-         class = "table table-striped table-responsive-md"
-         id="tabella">
-      <tr>
-        <td>Numero Persone</td>
-        <td>Numero Tavolo</td>
-        <td>Nome Tavolo</td>
-        <td>Ordine</td>
-      </tr>
+  <table style="width:80%; border:10px" id="Title">
+    <tr>
+      <td style="width:20%">Numero Persone</td>
+      <td style="width:20%">Numero Tavolo</td>
+      <td style="width:20%">Nome Tavolo</td>
+      <td tyle="width:40%">Ordine</td>
+    </tr>
+  </table>
+  <table style="width:80%; border:1px" id="tabella">
       <tr th:each="ordine:${dati.getOrdini()}">
-        <td th:text="${ordine.getPersone()}"></td>
-        <td th:text="${ordine.getNumeroTavolo()}"></td>
-        <td th:text="${ordine.getNomeTavolo()}"></td>
-        <td>
+        <td th:text="${ordine.getPersone()}" style="width:20%"></td>
+        <td th:text="${ordine.getNumeroTavolo()}" style="width:20%"></td>
+        <td th:text="${ordine.getNomeTavolo()}" style="width:20%"></td>
+        <td style="width:40%">
           <table>
             <tr th:each="piatti:${ordine.getOrdine()}">
             <td th:text="${piatti.getNome()}"></td>

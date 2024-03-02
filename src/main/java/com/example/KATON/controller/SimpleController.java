@@ -15,6 +15,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.*;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
 import java.text.DecimalFormat;
 import java.util.*;
 
@@ -46,8 +49,8 @@ public class SimpleController {
     private String[] dolci={"dolce"};
     private Map<String, String[]> piatti=new HashMap<String, String[]>();
 
-
-
+    public SimpleController() throws IOException {
+    }
 
 
     @GetMapping("/")
@@ -94,6 +97,7 @@ public class SimpleController {
         for (Piatto p:res.getPiatti()){
             tot+=p.getPrezzo()*p.getQuantity();
         }
+        tot+=res.getPersone()*1.5;
         DecimalFormat df = new DecimalFormat("#.##");
         StringWrapper message = new StringWrapper("totale: "+df.format(tot).toString()+"€");
         simpMessagingTemplate.convertAndSendToUser("cassa", "/specific", message);
@@ -112,7 +116,7 @@ public class SimpleController {
                     ordine1.setNomeTavolo(allParams.get("nomeTav"));
                     ordine1.setNumeroTavolo(Integer.parseInt(allParams.get("numTav")));
                     ordine1.setCameriere(cameriere1);
-                    ordine1.setServitore(cameriere.getNome());
+                    ordine1.setServitore(allParams.get("cameriere"));
                     cameriere1.getOrdini().add(ordine1);
                     cameriereRepository.save(cameriere1);
                 }
@@ -123,7 +127,7 @@ public class SimpleController {
     }
 
     @MessageMapping("/registra")
-    public void Registra(@Payload Map<String,String> allParams){
+    public void Registra(@Payload Map<String,String> allParams) throws IOException {
         if(securityConfig.getUserDetailsService().userExists(allParams.get("username"))){
             StringWrapper message = new StringWrapper("registrazione non avvenuta per "+allParams.get("username")+", nome già in uso");
             simpMessagingTemplate.convertAndSendToUser("cassa", "/specific", message);
@@ -133,6 +137,13 @@ public class SimpleController {
                     .password(allParams.get("password"))
                     .roles("USER")
                     .build());
+            Path currentDirectoryPath = FileSystems.getDefault().getPath("");
+            String currentDirectoryName = currentDirectoryPath.toAbsolutePath().toString();
+            BufferedWriter writer = new BufferedWriter(new FileWriter(currentDirectoryName+"/src/main/resources/database/sicurezza", true));
+            PrintWriter out = new PrintWriter(writer);
+            out.append(allParams.get("username")+"-"+allParams.get("password")+"\n");
+            writer.close();
+            out.close();
             StringWrapper message = new StringWrapper("registrazione avvenuta con successo per "+allParams.get("username"));
             simpMessagingTemplate.convertAndSendToUser("cassa", "/specific", message);
         }
@@ -143,7 +154,11 @@ public class SimpleController {
         List<Ordine1> ordini = new ArrayList<Ordine1>();
         for(String c : cameriereRepository.getAllNames()){
             for(Ordine o: cameriereRepository.getCameriereByNome(c).getOrdini()){
-                ordini.add(new Ordine1(o));
+                for (String r: reparti){
+                    if(!o.getCameriere().equals(r)) {
+                        ordini.add(new Ordine1(o));
+                    }
+                }
             }
         }
         simpMessagingTemplate.convertAndSendToUser("cassa","/specific", ordini);

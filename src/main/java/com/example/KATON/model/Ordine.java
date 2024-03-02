@@ -17,6 +17,7 @@ public class Ordine {
 	private int numeroTavolo;
 	private String nomeTavolo;
 	private int persone;
+	private String servitore;
 
 	@ManyToOne
 	@JoinColumn(name = "cameriere_id")
@@ -24,7 +25,6 @@ public class Ordine {
 	@OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
 	private List<Piatto> piatti;
 
-	private String servitore;
 
 
 	public int getNumeroTavolo() {

@@ -52,9 +52,13 @@ function show(message) {
         let tavolo=row.insertCell(1);
         let nome=row.insertCell(2);
         let piatti=row.insertCell(3);
+        persone.style.width="20%";
         persone.innerHTML=message.persone;
+        tavolo.style.width="20%";
         tavolo.innerHTML=message.numeroTavolo;
+        nome.style.width="20%";
         nome.innerHTML=message.nomeTavolo;
+        piatti.style.width="40%";
         piatti.innerHTML="<table id='piatti'></table>";
         const temp = document.getElementById("piatti");
         for( let o = 0; o<message.piatti.length; o++){

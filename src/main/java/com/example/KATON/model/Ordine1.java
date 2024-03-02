@@ -18,6 +18,7 @@ public class Ordine1 {
     private int numeroTavolo;
     private int persone;
     private String cameriere;
+    private String servitore;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Piatto> piatti;
 
@@ -35,5 +36,6 @@ public class Ordine1 {
         this.cameriere = ordine.getCameriere().getNome();
         this.persone = ordine.getPersone();
         this.piatti=ordine.getPiatti();
+        this.servitore=ordine.getServitore();
     }
 }

@@ -42,13 +42,17 @@ function show(message) {
         var row = response.insertRow(0);
         row.id= message.nomeTavolo +"--"+message.cameriere;
         let tavolo=row.insertCell(0);
+        tavolo.style.width="20%";
         let nome=row.insertCell(1);
+        nome.style.width="20%";
         let cameriere=row.insertCell(2);
+        cameriere.style.width="20%";
         let piatti=row.insertCell(3);
+        piatti.style.width="40%";
         tavolo.innerHTML=message.numeroTavolo;
         nome.innerHTML=message.nomeTavolo;
         piatti.innerHTML="<table id='piatti'></table>";
-        cameriere.innerHTML=message.cameriere;
+        cameriere.innerHTML=message.servitore;
         const temp = document.getElementById("piatti");
         for( let o = 0; o<message.piatti.length; o++){
             row=temp.insertRow(0);
