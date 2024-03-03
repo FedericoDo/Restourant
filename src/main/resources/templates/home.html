@@ -1,39 +1,16 @@
-<!--
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
-    <meta charset="ISO-8859-1">
-    <title>Employee</title>
-    <link rel="stylesheet"
-          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-          crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Title</title>
 </head>
 <body>
-<div class="container my-2" align="center">
 
-    <h3>Employee List</h3>
-    <a th:href="@{/addnew}" class="btn btn-primary btn-sm mb-3" >Add Employee</a>
-    <table style="width:80%" border="1"
-           class = "table table-striped table-responsive-md">
-        <thead>
-        <tr>
-            <th>Username</th>
-            <th>Password</th>
-            <th>Pagina</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="dati:${allDatiList}">
-            <td th:text="${dati.getUsername()}"></td>
-            <td th:text="${dati.getPassword()}"></td>
-            <td>
-                <a th:href="@{/dati/{id}(id=${dati.getId()})}"
-                   class="btn btn-danger">Delete</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+<a href="/registra" id="registra"> Registrati </a>
+<br/>
+<a href="/home2" id="home2"> Vai a pagina ordini </a>
+<br/>
+<a href="/aggiungi2" id="aggiungi2"> SOLO PER LA CASSA </a>
+<br/>
 </body>
-</html>-->
+</html>

@@ -3,14 +3,6 @@ var stompClient = null;
 $(document).ready(function() {
     console.log("Index page is ready");
     connect();
-    //
-    // $("#send").click(function() {
-    //     sendMessage();
-    // });
-    //
-    // $("#send-private").click(function() {
-    //     sendPrivateMessage();
-    // });
 });
 
 function connect() {
@@ -18,12 +10,7 @@ function connect() {
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
         console.log('Connected: ' + frame);
-        // stompClient.subscribe('/topic/messages', function (message) {
-        //     showMessage(JSON.parse(message.body).content);
-        // });
-
         stompClient.subscribe('/user/topic/private-messages', function (message) {
-           // showMessage(JSON.parse(message.body).content);
            showMessage(message.body);
         });
     });
@@ -33,14 +20,30 @@ function showMessage(message) {
     console.log("arrivato");
     $("#messages").innerHTML("<tr><td>" + message + "</td></tr>");
 }
-
-// function sendMessage() {
-//     console.log("sending message");
-//     stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': $("#message").val()}));
-// }
-//
-// function sendPrivateMessage() {
-//     console.log("sending private message");
-//     stompClient.send("/ws/private-message", {}, JSON.stringify({'messageContent': $("#private-message").val()}));
-// }
-
+function hide(className) {
+    const elements = document.getElementsByClassName(className);
+    for(let i = 0; i < elements.length; i++) {
+        if(elements[i].style.textDecoration=="line-through")
+            elements[i].style.textDecoration="none";
+        else
+            elements[i].style.textDecoration="line-through";
+    }
+}
+function fill(message){
+    const temp = document.getElementById("piatti");
+    for( let o = 0; o<message.piatti.length; o++){
+        row=temp.insertRow(0);
+        let nomePiatto=row.insertCell(0);
+        let quantità=row.insertCell(1);
+        let note=row.insertCell(2);
+        nomePiatto.innerHTML=message.piatti[o].nome;
+        nomePiatto.className=message.cameriere+message.nomeTavolo+message.piatti[o].nome;
+        nomePiatto.onclick=function(){hide(this.className);};
+        quantità.innerHTML=message.piatti[o].quantity;
+        quantità.className=message.cameriere+message.nomeTavolo+message.piatti[o].nome;
+        quantità.onclick=function(){hide(this.className);};
+        note.innerHTML=message.piatti[o].note;
+        note.className=message.cameriere+message.nomeTavolo+message.piatti[o].nome;
+        note.onclick=function(){hide(this.className);};
+    }
+}

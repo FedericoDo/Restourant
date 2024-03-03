@@ -53,15 +53,6 @@ function show(message) {
         nome.innerHTML=message.nomeTavolo;
         piatti.innerHTML="<table id='piatti'></table>";
         cameriere.innerHTML=message.servitore;
-        const temp = document.getElementById("piatti");
-        for( let o = 0; o<message.piatti.length; o++){
-            row=temp.insertRow(0);
-            let nomePiatto=row.insertCell(0);
-            let quantità=row.insertCell(1);
-            let note=row.insertCell(2);
-            nomePiatto.innerHTML=message.piatti[o].nome;
-            quantità.innerHTML=message.piatti[o].quantity;
-            note.innerHTML=message.piatti[o].note;
-        }
+        fill(message);
     }
 }

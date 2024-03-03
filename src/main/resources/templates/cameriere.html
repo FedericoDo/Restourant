@@ -3,6 +3,7 @@
 <head>
   <meta charset="ISO-8859-1">
   <title>Dato</title>
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.js"></script>
@@ -20,7 +21,7 @@
       <td style="width:20%">Numero Persone</td>
       <td style="width:20%">Numero Tavolo</td>
       <td style="width:20%">Nome Tavolo</td>
-      <td tyle="width:40%">Ordine</td>
+      <td style="width:40%">Ordine</td>
     </tr>
   </table>
   <table style="width:80%; border:1px" id="tabella">
@@ -31,9 +32,9 @@
         <td style="width:40%">
           <table>
             <tr th:each="piatti:${ordine.getOrdine()}">
-            <td th:text="${piatti.getNome()}"></td>
-            <td th:text="${piatti.getQuantity()}"></td>
-            <td th:text="${piatti.getNote()}"></td>
+            <td onclick="hide(this.className)" th:text="${piatti.getNome()}" th:class="${ordine.getCameriere().getNome()}+${ordine.getNomeTavolo()}+${piatti.getNome()}"></td>
+            <td onclick="hide(this.className)" th:text="${piatti.getQuantity()}" th:class="${ordine.getCameriere().getNome()}+${ordine.getNomeTavolo()}+${piatti.getNome()}"></td>
+            <td onclick="hide(this.className)" th:text="${piatti.getNote()}" th:class="${ordine.getCameriere().getNome()}+${ordine.getNomeTavolo()}+${piatti.getNome()}"></td>
             </tr>
           </table>
         </td>

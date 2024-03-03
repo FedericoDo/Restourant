@@ -3,8 +3,6 @@ package com.example.KATON.controller;
 import com.example.KATON.config.SecurityConfig;
 import com.example.KATON.model.*;
 import com.example.KATON.repository.CameriereRepository;
-import com.example.KATON.repository.DatiRepository;
-import com.example.KATON.repository.OrdineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -27,18 +25,12 @@ public class SimpleController {
     @Value("${spring.application.name}")
     String appName;
     @Autowired
-    private DatiRepository datiRepository;
-    @Autowired
     private CameriereRepository cameriereRepository;
-    @Autowired
-    private OrdineRepository ordineRepository;
     @Autowired
     private SimpMessagingTemplate simpMessagingTemplate;
 
     @Autowired
     private SecurityConfig securityConfig;
-
-    private Model privatemodel;
 
     private Prezzario prezzario = new Prezzario();
 
@@ -55,20 +47,18 @@ public class SimpleController {
 
     @GetMapping("/")
     public String homePage(Model model) {
-      //  model.addAttribute("allDatiList", datiRepository.findAll());
-        return "home2";
+        return "home";
     }
 
-    @GetMapping("/prova")
-    public void register(@RequestParam String user){
-        System.out.println(user);
+    @GetMapping("/home2")
+    public String SecondPage(Model model) {
+        return "home2";
     }
 
     @GetMapping("/aggiungi2")
     public String newOrder2(Model model){
         model.addAttribute("camerieri", cameriereRepository.getAllNames());
         model.addAttribute("piatti",(prezzario.getTable().keySet()));
-        privatemodel = model;
         return "aggiungi2";
     }
     @GetMapping("/registra")
@@ -178,21 +168,7 @@ public class SimpleController {
         if(cameriereRepository.getCameriereByNome(name) == null)
             cameriereRepository.save(new Cameriere(name,new ArrayList<Ordine>()));
         model.addAttribute("dati", cameriereRepository.getCameriereByNome(name));
-        privatemodel = model;
         return "cameriere";
-    }
-
-
-    @PutMapping("/dati/{id}")
-    Dati replaceDato(@RequestBody Dati newDati, @PathVariable Long id) {
-
-
-        return null;
-    }
-
-    @DeleteMapping("/dati/{id}")
-    void deleteDato(@PathVariable Long id) {
-        datiRepository.deleteById(id);
     }
 
 }
