@@ -32,9 +32,9 @@
         <td style="width:40%">
           <table>
             <tr th:each="piatti:${ordine.getOrdine()}">
-            <td th:text="${piatti.getNome()}"></td>
-            <td th:text="${piatti.getQuantity()}"></td>
-            <td th:text="${piatti.getNote()}"></td>
+              <td onclick="hide(this.className)" th:text="${piatti.getNome()}" th:class="${ordine.getCameriere().getNome()}+${ordine.getNomeTavolo()}+${piatti.getNome()}"></td>
+              <td onclick="hide(this.className)" th:text="${piatti.getQuantity()}" th:class="${ordine.getCameriere().getNome()}+${ordine.getNomeTavolo()}+${piatti.getNome()}"></td>
+              <td onclick="hide(this.className)" th:text="${piatti.getNote()}" th:class="${ordine.getCameriere().getNome()}+${ordine.getNomeTavolo()}+${piatti.getNome()}"></td>
             </tr>
           </table>
         </td>

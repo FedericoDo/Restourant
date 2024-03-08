@@ -28,6 +28,17 @@ function hide(className) {
         else
             elements[i].style.textDecoration="line-through";
     }
+    /*const allElements = document.getElementsByClassName(className[1]);
+    let bool=true;
+    for(let i = 0; i < allElements.length; i++) {
+        if(allElements[i].style.textDecoration=="none")
+            bool=false;
+    }
+    if(bool){
+        const cameriere=document.getElementById("hidden").value;
+        cambiaImmagine(cameriere);
+    }*/
+
 }
 function fill(message){
     const temp = document.getElementById("piatti");
@@ -45,5 +56,8 @@ function fill(message){
         note.innerHTML=message.piatti[o].note;
         note.className=message.cameriere+message.nomeTavolo+message.piatti[o].nome;
         note.onclick=function(){hide(this.className);};
+/*
+        document.getElementById('hidden').value=message.cameriere;
+*/
     }
 }
