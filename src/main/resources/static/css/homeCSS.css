@@ -1,0 +1,7 @@
+.colonna{
+    float: left;
+    width: 33.33%;
+    padding: 10px;
+    height: 300px; /* Should be removed. Only for demonstration */
+    background: url('file:C:\Users\FEDERICO\Desktop\KATON\src\main\resources\database\inCorso.jpg');
+}

@@ -43,7 +43,7 @@ public class SecurityConfig {
         reader.close();
         http
                 .authorizeHttpRequests()
-                    .requestMatchers("/","/ws/**")
+                    .requestMatchers("/","/ws/**","/css/homeCSS.css")
                     .permitAll()
                 .and()
                 .authorizeHttpRequests()
