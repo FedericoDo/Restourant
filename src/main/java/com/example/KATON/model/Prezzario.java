@@ -19,7 +19,7 @@ public class Prezzario {
         table=new LinkedHashMap<>();
         Path currentDirectoryPath = FileSystems.getDefault().getPath("");
         String currentDirectoryName = currentDirectoryPath.toAbsolutePath().toString();
-        BufferedReader reader = new BufferedReader(new FileReader(currentDirectoryName+"/src/main/resources/database/prezzario"));
+        BufferedReader reader = new BufferedReader(new FileReader(currentDirectoryName+"/src/main/resources/static/database/prezzario"));
         String currentLine = reader.readLine();
         while (currentLine != null) {
             String[] parts = currentLine.split("-");

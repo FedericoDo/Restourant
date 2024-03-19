@@ -129,7 +129,7 @@ public class SimpleController {
                     .build());
             Path currentDirectoryPath = FileSystems.getDefault().getPath("");
             String currentDirectoryName = currentDirectoryPath.toAbsolutePath().toString();
-            BufferedWriter writer = new BufferedWriter(new FileWriter(currentDirectoryName+"/src/main/resources/database/sicurezza", true));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(currentDirectoryName+"/src/main/resources/static/database/sicurezza", true));
             PrintWriter out = new PrintWriter(writer);
             out.append(allParams.get("username")+"-"+allParams.get("password")+"\n");
             writer.close();

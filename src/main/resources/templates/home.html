@@ -3,17 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="/css/homeCSS.css">
-
+    <script>
+        function loadCSS(url) {
+            var link = document.createElement("link");
+            link.rel = "stylesheet";
+            link.type = "text/css";
+            link.href = url;
+            document.head.appendChild(link);
+        }
+        if (window.innerWidth < 1000) {
+            console.log("mobile");
+            loadCSS("/css/homeCSS-mobile.css");
+        } else {
+            console.log("desktop");
+            loadCSS("/css/homeCSS.css");
+        }
+    </script>
 </head>
 <body>
-<div class="colonna">
+<div class="colonna" id="colonna1">
     <a href="/registra" id="registra"> Registrati </a>
 </div>
-<div class="colonna">
+<div class="colonna" id="colonna2">
     <a href="/home2" id="home2"> Vai a pagina ordini </a>
 </div>
-<div class="colonna">
+<div class="colonna" id="colonna3">
     <a href="/aggiungi2" id="aggiungi2"> SOLO PER LA CASSA </a>
 </div>
 </body>

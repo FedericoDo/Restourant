@@ -1,8 +1,7 @@
 .colonna{
-    float: left;
-    width: 30%;
+    width: 100%;
     padding: 10px;
-    height: 600px; /* Should be removed. Only for demonstration */
+    height: 550px; /* Should be removed. Only for demonstration */
     display: flex;
     align-items: center;
 }
@@ -11,12 +10,12 @@
     width: 100%; /* Expand the <a> tag to fill its parent column */
 }
 #colonna1{
-    background: url('/database/diego.jpg');
+    background: url('/database/diego-mobile.jpg');
     background-size: cover;
 
 }
 #colonna2{
-    background: url('/database/stefano.jpg');
+    background: url('/database/stefano-mobile.jpg');
     background-size: cover;
 }
 #colonna3{
@@ -27,5 +26,5 @@ a {
     font-family: Serif;
     font-size: 100px;
     text-decoration: none;
-    color: green;
+    color: yellow;
 }

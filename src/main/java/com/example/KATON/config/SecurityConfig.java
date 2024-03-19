@@ -28,7 +28,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         Path currentDirectoryPath = FileSystems.getDefault().getPath("");
         String currentDirectoryName = currentDirectoryPath.toAbsolutePath().toString();
-        BufferedReader reader = new BufferedReader(new FileReader(currentDirectoryName+"/src/main/resources/database/sicurezza"));
+        BufferedReader reader = new BufferedReader(new FileReader(currentDirectoryName+"/src/main/resources/static/database/sicurezza"));
         String currentLine = reader.readLine();
         while ((currentLine != "")&&(currentLine != null)) {
             String[] parts = currentLine.split("-");
@@ -43,7 +43,7 @@ public class SecurityConfig {
         reader.close();
         http
                 .authorizeHttpRequests()
-                    .requestMatchers("/","/ws/**","/css/homeCSS.css")
+                    .requestMatchers("/","/ws/**","/css/**","/database/**")
                     .permitAll()
                 .and()
                 .authorizeHttpRequests()
