@@ -9,6 +9,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.js"></script>
   <script type="text/javascript" th:src="@{/src/scripts.js}"></script>
   <script type="text/javascript" th:src="@{/src/app2.js}"></script>
+  <link rel="stylesheet" type="text/css" href="/css/ordini.css"/>
 
 
 
@@ -18,16 +19,18 @@
   <div id="cameriere" th:text="${dati.getNome()}"></div>
   <table style="width:80%; border:10px" id="Title">
     <tr>
-      <td style="width:20%">Numero Persone</td>
-      <td style="width:20%">Numero Tavolo</td>
-      <td style="width:20%">Nome Tavolo</td>
+      <td style="width:15%">Stato</td>
+      <td style="width:15%">Numero Persone</td>
+      <td style="width:15%">Numero Tavolo</td>
+      <td style="width:15%">Nome Tavolo</td>
       <td style="width:40%">Ordine</td>
     </tr>
   </table>
   <table style="width:80%; border:1px" id="tabella">
       <tr th:each="ordine:${dati.getOrdini()}">
-        <td th:text="${ordine.getPersone()}" style="width:20%"></td>
-        <td th:text="${ordine.getNumeroTavolo()}" style="width:20%"></td>
+        <td style="width:15%"><img src="/database/inCorso.jpg" th:class="${ordine.getNomeTavolo()}+${ordine.getCameriere().getNome()}+cross" onclick="changeStatus(this.className)"/> <img src="/database/spunta-verde.png" style="visibility: hidden " th:class="${ordine.getNomeTavolo()}+${ordine.getCameriere().getNome()}+tic" onclick="changeStatus(this.className)"/></td>
+        <td th:text="${ordine.getPersone()}" style="width:15%"></td>
+        <td th:text="${ordine.getNumeroTavolo()}" style="width:15%"></td>
         <td th:text="${ordine.getNomeTavolo()}" style="width:20%"></td>
         <td style="width:40%">
           <table>

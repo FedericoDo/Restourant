@@ -19,6 +19,8 @@ public class Ordine {
 	private int persone;
 	private String servitore;
 
+	private boolean completato;
+
 	@ManyToOne
 	@JoinColumn(name = "cameriere_id")
 	private Cameriere cameriere;
@@ -68,6 +70,13 @@ public class Ordine {
 		piatti = new ArrayList<Piatto>();
 	}
 
+	public boolean isCompletato() {
+		return completato;
+	}
+
+	public void setCompletato(boolean completato) {
+		this.completato = completato;
+	}
 
 	public void setId(Long id) {
 		this.id = id;

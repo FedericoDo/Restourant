@@ -35,32 +35,4 @@ class LoadDatabase {
     @Autowired
     IdRepository idRepository;
 
-    @Bean
-    CommandLineRunner initDatabase() {
-
-        return args -> {
-            log.info("Preloading " + datiRepository.save(new Dati("katon", "katon", "katon.jsp")));
-            log.info("Preloading " + datiRepository.save(new Dati("odoshishi", "odoshishi","odoshishi.jsp")));
-            Ordine prova = new Ordine();
-            List<Ordine> ordini = new ArrayList<Ordine>();
-            prova.setPersone(3);
-            prova.setNomeTavolo("donati");
-            prova.setNumeroTavolo(54);
-           // prova.getOrdine().add(new Piatto("PASTA", 1));
-            ordini.add(prova);
-            log.info("Preloading " + cameriereRepository.save(new Cameriere("federico", ordini)));
-          //  log.info("Preloading " + ordineRepository.save(prova));
-            Cameriere cameriere1 = new Cameriere();
-            cameriere1.setNome("federico1");
-            cameriere1.setOrdini(new ArrayList<>());
-            Ordine ordine1 = new Ordine();
-            ordine1.setNumeroTavolo(6);
-            ordine1.setPersone(1);
-            ordine1.setNomeTavolo("ciao");
-//            cameriere1.getOrdini().add(ordine1);
-
-            cameriereRepository.save(cameriere1);
-            ordineRepository.save(ordine1);
-        };
-    }
 }
