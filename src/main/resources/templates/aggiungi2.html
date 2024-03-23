@@ -19,13 +19,13 @@ Nascondi menu <input type="checkBox" onchange="HideMenu()"/>
     Numero Tavolo:<input type="number" id="num" name="numTav"/> <br/>
     Numero Persone:<input type="number" id="persone" name="persTav"/> <br/>
     <select name="cameriere" id="cameriere">
-      <option th:each="c:${camerieri}" th:text="${c}" th:value="${c}"></option>
+      <option th:each="c:${camerieri}" th:text="${c.getValore()}" th:value="${c.getValore().replaceAll('-\d+','')}"></option>
     </select>
     <div th:each="piatto:${piatti}">
         <input type="text" readonly th:value="${piatto}" style="border:none;">
-        <input type="checkbox" th:id="${piatto}" onchange="prova(this.id)"/>
+        Quantit&agrave:<input type="checkbox" th:id="${piatto}" onchange="prova(this.id)"/>
         <input type="number" th:id="'quanta'+${piatto}" style="visibility:hidden"/>
-        <input type="checkbox" th:id="${piatto}" onchange="note(this.id)"/>
+        Note:<input type="checkbox" th:id="${piatto}" onchange="note(this.id)"/>
         <input type="text" th:id="'note'+${piatto}" style="visibility:hidden"/>
     </div>
 

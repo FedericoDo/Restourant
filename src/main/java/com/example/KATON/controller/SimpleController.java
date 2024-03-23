@@ -57,7 +57,25 @@ public class SimpleController {
 
     @GetMapping("/aggiungi2")
     public String newOrder2(Model model){
-        model.addAttribute("camerieri", cameriereRepository.getAllNames());
+        List<StringWrapper> camerieri = new ArrayList<>();
+        for(Cameriere c:cameriereRepository.findAll()){
+            int i =0;
+            boolean found = false;
+            for(String r: reparti){
+                if(c.getNome().equalsIgnoreCase(r)){
+                    found = true;
+                }
+            }
+            if(!found) {
+                for (Ordine o : c.getOrdini()) {
+                    if(!o.isCompletato()){
+                        i++;
+                    }
+                }
+                camerieri.add(new StringWrapper(c.getNome() + "-" + i));
+            }
+        }
+        model.addAttribute("camerieri", camerieri);
         model.addAttribute("piatti",(prezzario.getTable().keySet()));
         return "aggiungi2";
     }
@@ -141,13 +159,18 @@ public class SimpleController {
     @MessageMapping("/print")
     public void PrintToUser(@Payload String request){
 
+        boolean found;
         List<Ordine1> ordini = new ArrayList<Ordine1>();
         for(String c : cameriereRepository.getAllNames()){
             for(Ordine o: cameriereRepository.getCameriereByNome(c).getOrdini()){
+                found = false;
                 for (String r: reparti){
-                    if(!o.getCameriere().equals(r)) {
-                        ordini.add(new Ordine1(o));
+                    if(o.getCameriere().getNome().equalsIgnoreCase(r)) {
+                        found= true;
                     }
+                }
+                if(!found) {
+                    ordini.add(new Ordine1(o));
                 }
             }
         }
