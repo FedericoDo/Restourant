@@ -83,6 +83,18 @@ public class SimpleController {
     public String registraPage(Model model){
         return "registra";
     }
+
+    @MessageMapping("/cambia")
+    public void Cambia(@Payload Map<String,String> allParams){
+        Cameriere cameriere = cameriereRepository.getCameriereByNome(allParams.get("cameriere"));
+        for(Ordine o:cameriere.getOrdini()){
+            if(o.getNomeTavolo().equals(allParams.get("tavolo"))){
+                o.setCompletato(!o.isCompletato());
+                cameriereRepository.save(cameriere);
+                break;
+            }
+        }
+    }
     @MessageMapping("/private")
     public void SendToUser(@Payload Map<String,String> allParams){
         Ordine ordine = new Ordine();

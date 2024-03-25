@@ -19,7 +19,9 @@ function changeStatus(className) {
     }else{
         document.getElementsByClassName(className.replace("tic","cross"))[0].style.visibility="visible";
     }
-    //privateStompClient.send("/app/cambia", {}, JSON.stringify({'cameriere': cameriere}));
+    let cameriere = className.split("_")[1];
+    let tavolo = className.split("_")[0];
+    privateStompClient.send("/app/cambia", {}, JSON.stringify({'cameriere': cameriere, 'tavolo': tavolo}));
 }
 
 function show(message) {
@@ -33,7 +35,7 @@ function show(message) {
         let nome=row.insertCell(3);
         let piatti=row.insertCell(4);
         casella.style.width="15%";
-        casella.innerHTML='<img src="/database/inCorso.jpg" class="'+message.nomeTavolo+message.cameriere+'cross" onclick="changeStatus(this.className)"/> <img src="/database/spunta-verde.png" style="visibility: hidden " class="'+message.nomeTavolo+message.cameriere+'tic" onclick="changeStatus(this.className)"/>';
+        casella.innerHTML='<img src="/database/inCorso.jpg" class="'+message.nomeTavolo+'_'+message.cameriere+'_cross" onclick="changeStatus(this.className)"/> <img src="/database/spunta-verde.png" style="visibility: hidden " class="'+message.nomeTavolo+'_'+message.cameriere+'_tic" onclick="changeStatus(this.className)"/>';
         persone.style.width="15%";
         persone.innerHTML=message.persone;
         tavolo.style.width="15%";

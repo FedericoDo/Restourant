@@ -28,7 +28,7 @@
   </table>
   <table style="width:80%; border:1px" id="tabella">
       <tr th:each="ordine:${dati.getOrdini()}">
-        <td style="width:15%"><img src="/database/inCorso.jpg" th:class="${ordine.getNomeTavolo()}+${ordine.getCameriere().getNome()}+cross" onclick="changeStatus(this.className)"/> <img src="/database/spunta-verde.png" style="visibility: hidden " th:class="${ordine.getNomeTavolo()}+${ordine.getCameriere().getNome()}+tic" onclick="changeStatus(this.className)"/></td>
+        <td style="width:15%"><img src="/database/inCorso.jpg" th:style="'visibility:'+ (${ordine.isCompletato()} ? 'hidden' : 'visible')" th:class="${ordine.getNomeTavolo()}+'_'+${ordine.getCameriere().getNome()}+'_cross'" onclick="changeStatus(this.className)"/> <img src="/database/spunta-verde.png" th:style="'visibility:'+ (${ordine.isCompletato()} ? 'visible' : 'hidden')" th:class="${ordine.getNomeTavolo()}+'_'+${ordine.getCameriere().getNome()}+'_tic'" onclick="changeStatus(this.className)"/></td>
         <td th:text="${ordine.getPersone()}" style="width:15%"></td>
         <td th:text="${ordine.getNumeroTavolo()}" style="width:15%"></td>
         <td th:text="${ordine.getNomeTavolo()}" style="width:20%"></td>

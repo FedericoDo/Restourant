@@ -68,6 +68,7 @@ public class Ordine {
 	public Ordine() {
 		super();
 		piatti = new ArrayList<Piatto>();
+		this.completato = false;
 	}
 
 	public boolean isCompletato() {
