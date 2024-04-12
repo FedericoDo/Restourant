@@ -43,8 +43,25 @@ function sendPrivateMessage2() {
 function show(message) {
     var response;
     if(message.valore != null){
-        response = document.getElementById('messages');
-        response.innerHTML = message.valore;
+        if(message.valore.includes("totale:")) {
+            response = document.getElementById('messages');
+            response.innerHTML = message.valore;
+        }else{
+            // Get the select element
+            var selectElement = document.getElementById('cameriere');
+
+            // Loop over the options in the select element
+            for (var i = 0; i < selectElement.options.length; i++) {
+                // Get the current option
+                var option = selectElement.options[i];
+
+                // Change the text and value of the option
+                if(option.text.split("-")[0] === message.valore.split("-")[0]) {
+                    option.text = message.valore;  // Replace with the new text you want
+                    option.value = message.valore.replaceAll('-\d+','');  // Replace with the new value you want
+                }
+            }
+        }
     }else{
         response = document.getElementById('messages');
         response.innerHTML = "<div id= ordiniAttivi>";

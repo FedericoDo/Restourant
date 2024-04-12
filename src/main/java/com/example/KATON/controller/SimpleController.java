@@ -90,6 +90,22 @@ public class SimpleController {
         for(Ordine o:cameriere.getOrdini()){
             if(o.getNomeTavolo().equals(allParams.get("tavolo"))){
                 o.setCompletato(!o.isCompletato());
+                int i =0;
+                boolean found = false;
+                for(String r: reparti){
+                    if(cameriere.getNome().equalsIgnoreCase(r)){
+                        found = true;
+                    }
+                }
+                if(!found) {
+                    for (Ordine or : cameriere.getOrdini()) {
+                        if(!or.isCompletato()){
+                            i++;
+                        }
+                    }
+                    StringWrapper res = new StringWrapper(cameriere.getNome() + "-" + i);
+                    simpMessagingTemplate.convertAndSendToUser("cassa","/specific", res);
+                }
                 cameriereRepository.save(cameriere);
                 break;
             }
@@ -103,8 +119,8 @@ public class SimpleController {
         ordine.setPersone(Integer.parseInt(allParams.get("persTav")));
         ordine.setNumeroTavolo(Integer.parseInt(allParams.get("numTav")));
         for(String g: prezzario.getTable().keySet()){
-            if(!(allParams.get(g.toString().toLowerCase()).equals(""))||!(allParams.get(g.toString().toLowerCase()).isEmpty())) {
-                ordine.getPiatti().add(new Piatto(g.toString(),Integer.parseInt(allParams.get(g.toString().toLowerCase())),prezzario.priceOf(g),allParams.get("note"+g.toString().toLowerCase())));
+            if(!(allParams.get(g.toLowerCase()).isEmpty())||!(allParams.get(g.toLowerCase()).isEmpty())) {
+                ordine.getPiatti().add(new Piatto(g,Integer.parseInt(allParams.get(g.toLowerCase())),prezzario.priceOf(g),allParams.get("note"+g.toLowerCase())));
             }
         }
         ordine.setCameriere(cameriere);
@@ -119,7 +135,7 @@ public class SimpleController {
         }
         tot+=res.getPersone()*1.5;
         DecimalFormat df = new DecimalFormat("#.##");
-        StringWrapper message = new StringWrapper("totale: "+df.format(tot).toString()+"€");
+        StringWrapper message = new StringWrapper("totale: "+df.format(tot)+"€");
         simpMessagingTemplate.convertAndSendToUser("cassa", "/specific", message);
         //TODO: MODIFICA QUANDO AVRAI MENU
 
