@@ -1,6 +1,6 @@
-var privateStompClient = null;
+let privateStompClient = null;
 
-var socket;
+let socket;
 
 socket = new SockJS('/ws');
 privateStompClient = Stomp.over(socket);
@@ -24,15 +24,15 @@ function changeStatus(className) {
 }
 
 function sendPrivateMessage() {
-    var nome = document.getElementById('nome').value;
-    var num = document.getElementById('num').value;
-    var persone = document.getElementById('persone').value;
-    var cameriere = document.getElementById('cameriere').value;
-    var pasta = document.getElementById('quantapasta').value;
+    const nome = document.getElementById('nome').value;
+    const num = document.getElementById('num').value;
+    const persone = document.getElementById('persone').value;
+    const cameriere = document.getElementById('cameriere').value;
+    const pasta = document.getElementById('quantapasta').value;
     document.getElementById('quantapasta').value='';
-    var dolce = document.getElementById('quantadolce').value;
+    const dolce = document.getElementById('quantadolce').value;
     document.getElementById('quantadolce').value='';
-    var carne = document.getElementById('quantacarne').value;
+    const carne = document.getElementById('quantacarne').value;
     document.getElementById('quantacarne').value='';
 
     // var elementi = document.querySelectorAll('input[type="number"]')
@@ -46,17 +46,17 @@ function sendPrivateMessage2() {
 }
 
 function show(message) {
-    var response;
+    let response;
     if(message.nomeTavolo != null) {
         response = document.getElementById('tabella');
-        var row = response.insertRow(0);
-        let casella=row.insertCell(0);
-        let tavolo=row.insertCell(1);
-        let nome=row.insertCell(2);
-        let cameriere=row.insertCell(3);
-        let piatti=row.insertCell(4);
+        const row = response.insertRow(0);
+        const casella=row.insertCell(0);
+        const tavolo=row.insertCell(1);
+        const nome=row.insertCell(2);
+        const cameriere=row.insertCell(3);
+        const piatti=row.insertCell(4);
         casella.style.width="15%";
-        casella.innerHTML='<img src="/database/inCorso.jpg" class="'+message.nomeTavolo+'_'+message.cameriere+'_cross" onclick="changeStatus(this.className)"/> <img src="/database/spunta-verde.png" style="visibility: hidden " class="'+message.nomeTavolo+'_'+message.cameriere+'_tic" onclick="changeStatus(this.className)"/>';
+        casella.innerHTML='<img alt="image cannot be displayed" src="/database/inCorso.jpg" class="'+message.nomeTavolo+'_'+message.cameriere+'_cross" onclick="changeStatus(this.className)"/> <img alt="image cannot be displayed" src="/database/spunta-verde.png" style="visibility: hidden " class="'+message.nomeTavolo+'_'+message.cameriere+'_tic" onclick="changeStatus(this.className)"/>';
         row.id= message.nomeTavolo +"--"+message.cameriere;
         tavolo.style.width="20%";
         nome.style.width="20%";
