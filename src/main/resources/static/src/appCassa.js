@@ -29,6 +29,18 @@ function sendPrivateMessage() {
     var notecarne = document.getElementById('notecarne').value;
     document.getElementById('notecarne').value='';
 
+    var selectElement = document.getElementById('cameriere');
+    for (var i = 0; i < selectElement.options.length; i++) {
+        // Get the current option
+        var option = selectElement.options[i];
+        // Change the text and value of the option
+        if(option.text.split("-")[0] === cameriere) {
+            var number = parseInt(option.text.split("-")[1],10);
+            number++;
+            option.text = cameriere + '-' + number;
+        }
+    }
+
     // var elementi = document.querySelectorAll('input[type="number"]')
 
     privateStompClient.send("/app/private", {},
@@ -58,7 +70,6 @@ function show(message) {
                 // Change the text and value of the option
                 if(option.text.split("-")[0] === message.valore.split("-")[0]) {
                     option.text = message.valore;  // Replace with the new text you want
-                    option.value = message.valore.replaceAll('-\d+','');  // Replace with the new value you want
                 }
             }
         }

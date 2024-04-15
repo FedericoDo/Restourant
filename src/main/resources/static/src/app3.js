@@ -11,7 +11,17 @@ privateStompClient.connect({}, function(frame) {
         show(JSON.parse(result.body));
     });
 });
-
+function changeStatus(className) {
+    document.getElementsByClassName(className)[0].style.visibility="hidden";
+    if(className.includes("cross")){
+        document.getElementsByClassName(className.replace("cross","tic"))[0].style.visibility="visible";
+    }else{
+        document.getElementsByClassName(className.replace("tic","cross"))[0].style.visibility="visible";
+    }
+    let cameriere = className.split("_")[1];
+    let tavolo = className.split("_")[0];
+    privateStompClient.send("/app/cambia", {}, JSON.stringify({'cameriere': cameriere, 'tavolo': tavolo}));
+}
 
 function sendPrivateMessage() {
     var nome = document.getElementById('nome').value;
@@ -40,14 +50,17 @@ function show(message) {
     if(message.nomeTavolo != null) {
         response = document.getElementById('tabella');
         var row = response.insertRow(0);
+        let casella=row.insertCell(0);
+        let tavolo=row.insertCell(1);
+        let nome=row.insertCell(2);
+        let cameriere=row.insertCell(3);
+        let piatti=row.insertCell(4);
+        casella.style.width="15%";
+        casella.innerHTML='<img src="/database/inCorso.jpg" class="'+message.nomeTavolo+'_'+message.cameriere+'_cross" onclick="changeStatus(this.className)"/> <img src="/database/spunta-verde.png" style="visibility: hidden " class="'+message.nomeTavolo+'_'+message.cameriere+'_tic" onclick="changeStatus(this.className)"/>';
         row.id= message.nomeTavolo +"--"+message.cameriere;
-        let tavolo=row.insertCell(0);
         tavolo.style.width="20%";
-        let nome=row.insertCell(1);
         nome.style.width="20%";
-        let cameriere=row.insertCell(2);
         cameriere.style.width="20%";
-        let piatti=row.insertCell(3);
         piatti.style.width="40%";
         tavolo.innerHTML=message.numeroTavolo;
         nome.innerHTML=message.nomeTavolo;

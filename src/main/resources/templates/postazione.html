@@ -9,6 +9,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.js"></script>
   <script type="text/javascript" th:src="@{/src/scripts.js}"></script>
   <script type="text/javascript" th:src="@{/src/app3.js}"></script>
+  <link rel="stylesheet" type="text/css" href="/css/ordini.css"/>
 
 
 
@@ -18,6 +19,7 @@
   <div id="reparto" th:text="${dati1.getNome()}"></div>
   <table style="width:80%; border:10px" id="Title">
     <tr>
+      <td style="width:15%">Stato</td>
       <td style="width:20%">Numero Tavolo</td>
       <td style="width:20%">Nome Tavolo</td>
       <td style="width:20%">Cameriere</td>
@@ -26,7 +28,8 @@
   </table>
   <table style="width:80%; border:1px"  id="tabella">
     <tr th:each="ordine:${dati1.getOrdini()}">
-        <td th:text="${ordine.getNumeroTavolo()}" style="width:20%"></td>
+      <td style="width:15%"><img src="/database/inCorso.jpg" th:style="'visibility:'+ (${ordine.isCompletato()} ? 'hidden' : 'visible')" th:class="${ordine.getNomeTavolo()}+'_'+${ordine.getCameriere().getNome()}+'_cross'" onclick="changeStatus(this.className)"/> <img src="/database/spunta-verde.png" th:style="'visibility:'+ (${ordine.isCompletato()} ? 'visible' : 'hidden')" th:class="${ordine.getNomeTavolo()}+'_'+${ordine.getCameriere().getNome()}+'_tic'" onclick="changeStatus(this.className)"/></td>
+      <td th:text="${ordine.getNumeroTavolo()}" style="width:20%"></td>
         <td th:text="${ordine.getNomeTavolo()}" style="width:20%"></td>
         <td th:text="${ordine.getServitore()}" style="width:20%"></td>
         <td style="width:40%">
