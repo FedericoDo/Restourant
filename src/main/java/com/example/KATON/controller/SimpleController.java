@@ -32,26 +32,26 @@ public class SimpleController {
     @Autowired
     private SecurityConfig securityConfig;
 
-    private Prezzario prezzario = new Prezzario();
+    private final Prezzario prezzario = new Prezzario();
 
-    private String[] reparti={"primi","secondi","dolci"};
+    private final String[] reparti={"primi","secondi","dolci"};
 
-    private String[] primi={"pasta"};
-    private String[] secondi={"carne"};
-    private String[] dolci={"dolce"};
-    private Map<String, String[]> piatti=new HashMap<String, String[]>();
+    private final String[] primi={"primo del giorno","pasta alla don bosco"};
+    private final String[] secondi={"carne"};
+    private final String[] dolci={"dolce"};
+    private final Map<String, String[]> piatti=new HashMap<>();
 
     public SimpleController() throws IOException {
     }
 
 
     @GetMapping("/")
-    public String homePage(Model model) {
+    public String homePage() {
         return "home";
     }
 
     @GetMapping("/home2")
-    public String SecondPage(Model model) {
+    public String SecondPage() {
         return "home2";
     }
 
@@ -62,8 +62,9 @@ public class SimpleController {
             int i =0;
             boolean found = false;
             for(String r: reparti){
-                if(c.getNome().equalsIgnoreCase(r)){
+                if (c.getNome().equalsIgnoreCase(r)) {
                     found = true;
+                    break;
                 }
             }
             if(!found) {
@@ -80,7 +81,7 @@ public class SimpleController {
         return "aggiungi2";
     }
     @GetMapping("/registra")
-    public String registraPage(Model model){
+    public String registraPage(){
         return "registra";
     }
 
@@ -93,8 +94,9 @@ public class SimpleController {
                 int i =0;
                 boolean found = false;
                 for(String r: reparti){
-                    if(cameriere.getNome().equalsIgnoreCase(r)){
+                    if (cameriere.getNome().equalsIgnoreCase(r)) {
                         found = true;
+                        break;
                     }
                 }
                 if(!found) {
@@ -120,7 +122,7 @@ public class SimpleController {
         ordine.setNumeroTavolo(Integer.parseInt(allParams.get("numTav")));
         for(String g: prezzario.getTable().keySet()){
             if(!(allParams.get(g.toLowerCase()).isEmpty())||!(allParams.get(g.toLowerCase()).isEmpty())) {
-                ordine.getPiatti().add(new Piatto(g,Integer.parseInt(allParams.get(g.toLowerCase())),prezzario.priceOf(g),allParams.get("note"+g.toLowerCase())));
+                ordine.getPiatti().add(new Piatto(g,Integer.parseInt(allParams.get(g.toLowerCase())),prezzario.priceOf(g),allParams.get("note "+g.toLowerCase())));
             }
         }
         ordine.setCameriere(cameriere);
@@ -146,8 +148,8 @@ public class SimpleController {
         for(String d:piatti.keySet()) {
             Ordine ordine1 = new Ordine();
             for(String c:piatti.get(d)) {
-                if((allParams.get(c)!=null) && (!(allParams.get(c.toString().toLowerCase()).equals("")))&& (!(allParams.get(c.toString().toLowerCase()).isEmpty()))) {
-                    ordine1.getPiatti().add(new Piatto(c, Integer.parseInt(allParams.get(c)), prezzario.priceOf(c), allParams.get("note"+c.toString().toLowerCase())));
+                if((allParams.get(c)!=null) && (!(allParams.get(c.toLowerCase()).isEmpty()))&& (!(allParams.get(c.toLowerCase()).isEmpty()))) {
+                    ordine1.getPiatti().add(new Piatto(c, Integer.parseInt(allParams.get(c)), prezzario.priceOf(c), allParams.get("note "+c.toLowerCase())));
                     Cameriere cameriere1 = cameriereRepository.getCameriereByNome(d);
                     ordine1.setNomeTavolo(allParams.get("nomeTav"));
                     ordine1.setNumeroTavolo(Integer.parseInt(allParams.get("numTav")));
@@ -157,7 +159,7 @@ public class SimpleController {
                     cameriereRepository.save(cameriere1);
                 }
             }
-            if(ordine1.getPiatti().size()>0)
+            if(!ordine1.getPiatti().isEmpty())
                 simpMessagingTemplate.convertAndSendToUser(d, "/specific", new Ordine1(ordine1));
         }
     }
@@ -185,16 +187,17 @@ public class SimpleController {
         }
     }
     @MessageMapping("/print")
-    public void PrintToUser(@Payload String request){
+    public void PrintToUser(){
 
         boolean found;
-        List<Ordine1> ordini = new ArrayList<Ordine1>();
+        List<Ordine1> ordini = new ArrayList<>();
         for(String c : cameriereRepository.getAllNames()){
             for(Ordine o: cameriereRepository.getCameriereByNome(c).getOrdini()){
                 found = false;
                 for (String r: reparti){
-                    if(o.getCameriere().getNome().equalsIgnoreCase(r)) {
-                        found= true;
+                    if (o.getCameriere().getNome().equalsIgnoreCase(r)) {
+                        found = true;
+                        break;
                     }
                 }
                 if(!found) {
@@ -210,14 +213,14 @@ public class SimpleController {
         for(String c: reparti){
             if(c.equals(name)){
                 if(cameriereRepository.getCameriereByNome(name) == null) {
-                    cameriereRepository.save(new Cameriere(name, new ArrayList<Ordine>()));
+                    cameriereRepository.save(new Cameriere(name, new ArrayList<>()));
                 }
                 model.addAttribute("dati1", cameriereRepository.getCameriereByNome(name));
                 return "postazione";
             }
         }
         if(cameriereRepository.getCameriereByNome(name) == null)
-            cameriereRepository.save(new Cameriere(name,new ArrayList<Ordine>()));
+            cameriereRepository.save(new Cameriere(name,new ArrayList<>()));
         model.addAttribute("dati", cameriereRepository.getCameriereByNome(name));
         return "cameriere";
     }
