@@ -15,16 +15,20 @@ import java.util.Map;
 public class Prezzario {
     private Map<String, Double> table;
 
-    public Prezzario() throws IOException {
+    public Prezzario() {
         table=new LinkedHashMap<>();
         Path currentDirectoryPath = FileSystems.getDefault().getPath("");
         String currentDirectoryName = currentDirectoryPath.toAbsolutePath().toString();
-        BufferedReader reader = new BufferedReader(new FileReader(currentDirectoryName+"/src/main/resources/static/database/prezzario"));
-        String currentLine = reader.readLine();
-        while (currentLine != null) {
-            String[] parts = currentLine.split("-");
-            table.put(parts[0],Double.parseDouble(parts[1]));
-            currentLine = reader.readLine();
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(currentDirectoryName + "/src/main/resources/static/database/prezzario"));
+            String currentLine = reader.readLine();
+            while (currentLine != null) {
+                String[] parts = currentLine.split("-");
+                table.put(parts[0], Double.parseDouble(parts[1]));
+                currentLine = reader.readLine();
+            }
+        }catch (Exception e) {
+            System.out.println("File not found, description: " + e);
         }
     }
 
