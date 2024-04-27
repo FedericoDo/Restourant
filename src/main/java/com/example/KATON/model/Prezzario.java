@@ -1,19 +1,17 @@
 package com.example.KATON.model;
 
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
+import lombok.Getter;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+@Getter
 public class Prezzario {
-    private Map<String, Double> table;
+    private final Map<String, Double> table;
 
     public Prezzario() {
         table=new LinkedHashMap<>();
@@ -30,10 +28,6 @@ public class Prezzario {
         }catch (Exception e) {
             System.out.println("File not found, description: " + e);
         }
-    }
-
-    public Map<String, Double> getTable() {
-        return table;
     }
 
     public double priceOf(String name){
