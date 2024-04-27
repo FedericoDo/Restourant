@@ -12,26 +12,30 @@ privateStompClient.connect({}, function(frame) {
     });
 });
 function sendPrivateMessage() {
-    var nome = document.getElementById('nome').value;
-    var num = document.getElementById('num').value;
-    var persone = document.getElementById('persone').value;
-    var cameriere = document.getElementById('cameriere').value;
-    var pdg = document.getElementById('quanta_primo_del_giorno').value;
+    const nome = document.getElementById('nome').value;
+    const num = document.getElementById('num').value;
+    const persone = document.getElementById('persone').value;
+    const cameriere = document.getElementById('cameriere').value;
+    const pdg = document.getElementById('quanta_primo_del_giorno').value;
     document.getElementById('quanta_primo_del_giorno').value='';
-    var notepdg = document.getElementById('note_primo_del_giorno').value;
+    const notepdg = document.getElementById('note_primo_del_giorno').value;
     document.getElementById('note_primo_del_giorno').value='';
-    var primo = document.getElementById('quanta_pasta_alla_don_bosco').value;
+    const primo = document.getElementById('quanta_pasta_alla_don_bosco').value;
     document.getElementById('quanta_pasta_alla_don_bosco').value='';
-    var noteprimo = document.getElementById('note_pasta_alla_don_bosco').value;
+    const noteprimo = document.getElementById('note_pasta_alla_don_bosco').value;
     document.getElementById('note_pasta_alla_don_bosco').value='';
-    var dolce = document.getElementById('quanta_dolce').value;
+    const dolce = document.getElementById('quanta_dolce').value;
     document.getElementById('quanta_dolce').value='';
-    var notedolce = document.getElementById('note_dolce').value;
+    const notedolce = document.getElementById('note_dolce').value;
     document.getElementById('note_dolce').value='';
-    var carne = document.getElementById('quanta_carne').value;
+    const carne = document.getElementById('quanta_carne').value;
     document.getElementById('quanta_carne').value='';
-    var notecarne = document.getElementById('note_carne').value;
+    const notecarne = document.getElementById('note_carne').value;
     document.getElementById('note_carne').value='';
+    const sconto_perc = document.getElementById('sconto_perc').value;
+    document.getElementById('sconto_perc').value='';
+    const sconto_netto = document.getElementById('sconto_netto').value;
+    document.getElementById('sconto_netto').value='';
 
     var selectElement = document.getElementById('cameriere');
     for (var i = 0; i < selectElement.options.length; i++) {
@@ -50,7 +54,8 @@ function sendPrivateMessage() {
     privateStompClient.send("/app/private", {},
         JSON.stringify({'nomeTav':nome,'numTav':num, 'persTav':persone,
             'cameriere':cameriere, 'primo del giorno':pdg, 'pasta alla don bosco':primo, 'carne':carne, 'dolce':dolce,
-            'note primo del giorno':notepdg,'note pasta alla don bosco':noteprimo, 'note dolce':notedolce, 'note carne':notecarne}));
+            'note primo del giorno':notepdg,'note pasta alla don bosco':noteprimo, 'note dolce':notedolce, 'note carne':notecarne,
+            'sconto_perc':sconto_perc, 'sconto_netto':sconto_netto}));
 }
 function sendPrivateMessage2() {
     privateStompClient.send("/app/print", {},"stampa");

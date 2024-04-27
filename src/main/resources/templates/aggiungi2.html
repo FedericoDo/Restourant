@@ -10,14 +10,15 @@
   <script type="text/javascript" th:src="@{/src/cassa.js}"></script>
   <script type="text/javascript" th:src="@{/src/scripts.js}"></script>
   <script type="text/javascript" th:src="@{/src/appCassa.js}"></script>
+  <link rel="stylesheet" type="text/css" href="/css/cassa.css"/>
 
 </head>
 <body>
 Nascondi menu <input type="checkBox" onchange="HideMenu()"/>
 <div id="menu">
-    Nome:<input type="text" id="nome" name="nomeTav"/> <br/>
-    Numero Tavolo:<input type="number" id="num" name="numTav"/> <br/>
-    Numero Persone:<input type="number" id="persone" name="persTav"/> <br/>
+    Nome:<input type="text" id="nome" name="nomeTav" class="spaziatura"/> <br/>
+    Numero Tavolo:<input type="number" id="num" name="numTav" class="spaziatura"/> <br/>
+    Numero Persone:<input type="number" id="persone" name="persTav" class="spaziatura"/> <br/>
     <select name="cameriere" id="cameriere">
       <option th:each="c:${camerieri}" th:text="${c.getValore()}" th:value="${c.getValore().replaceAll('-\d+','')}"></option>
     </select>
@@ -28,7 +29,8 @@ Nascondi menu <input type="checkBox" onchange="HideMenu()"/>
         Note:<input type="checkbox" th:id="${piatto.replaceAll(' ','_')}" onchange="note(this.id)"/>
         <input type="text" th:id="'note_'+${piatto.replaceAll(' ','_')}" style="visibility:hidden"/>
     </div>
-
+    Sconto percentuale:<input type="number" id="sconto_perc" name="sconto_perc" class="spaziatura"/> <br/>
+    Sconto netto:<input type="number" id="sconto_netto" name="sconto_netto" class="spaziatura"/> <br/>
    <button id="sendMessage" onclick="sendPrivateMessage();">Send</button>
 </div>
 <div>

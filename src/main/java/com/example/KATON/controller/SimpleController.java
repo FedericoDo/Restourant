@@ -136,6 +136,12 @@ public class SimpleController {
             tot+=p.getPrezzo()*p.getQuantity();
         }
         tot+=res.getPersone()*1.5;
+        if((allParams.get("sconto_netto")!=null)&&(!allParams.get("sconto_netto").isEmpty())) {
+            tot-=Double.parseDouble(allParams.get("sconto_netto"));
+        }
+        if((allParams.get("sconto_perc")!=null)&&(!allParams.get("sconto_perc").isEmpty())){
+            tot-=(tot*Double.parseDouble(allParams.get("sconto_perc"))/100);
+        }
         DecimalFormat df = new DecimalFormat("#.##");
         StringWrapper message = new StringWrapper("totale: "+df.format(tot)+"€");
         simpMessagingTemplate.convertAndSendToUser("cassa", "/specific", message);
