@@ -23,7 +23,7 @@ function showMessage(message) {
 function hide(className) {
     const elements = document.getElementsByClassName(className);
     for(let i = 0; i < elements.length; i++) {
-        if(elements[i].style.textDecoration=="line-through")
+        if(elements[i].style.textDecoration==="line-through")
             elements[i].style.textDecoration="none";
         else
             elements[i].style.textDecoration="line-through";
@@ -36,14 +36,14 @@ function fill(message){
     for( let o = 0; o<message.piatti.length; o++){
         row=temp.insertRow(0);
         let nomePiatto=row.insertCell(0);
-        let quantità=row.insertCell(1);
+        let quantita=row.insertCell(1);
         let note=row.insertCell(2);
         nomePiatto.innerHTML=message.piatti[o].nome;
         nomePiatto.className=message.cameriere+message.nomeTavolo+message.piatti[o].nome;
         nomePiatto.onclick=function(){hide(this.className);};
-        quantità.innerHTML=message.piatti[o].quantity;
-        quantità.className=message.cameriere+message.nomeTavolo+message.piatti[o].nome;
-        quantità.onclick=function(){hide(this.className);};
+        quantita.innerHTML=message.piatti[o].quantity;
+        quantita.className=message.cameriere+message.nomeTavolo+message.piatti[o].nome;
+        quantita.onclick=function(){hide(this.className);};
         note.innerHTML=message.piatti[o].note;
         note.className=message.cameriere+message.nomeTavolo+message.piatti[o].nome;
         note.onclick=function(){hide(this.className);};
