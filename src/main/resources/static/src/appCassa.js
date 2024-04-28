@@ -16,22 +16,62 @@ function sendPrivateMessage() {
     const num = document.getElementById('num').value;
     const persone = document.getElementById('persone').value;
     const cameriere = document.getElementById('cameriere').value;
+    const adc = document.getElementById('quanta_antipasto_di_campomaggiore').value;
+    document.getElementById('quanta_antipasto_di_campomaggiore').value='';
+    const noteadc = document.getElementById('note_antipasto_di_campomaggiore').value;
+    document.getElementById('note_antipasto_di_campomaggiore').value='';
+    const bm = document.getElementById('quanta_bruschette_miste').value;
+    document.getElementById('quanta_bruschette_miste').value='';
+    const notebm = document.getElementById('note_bruschette_miste').value;
+    document.getElementById('note_bruschette_miste').value='';
+    const suppli = document.getElementById('quanta_tris_di_suppli').value;
+    document.getElementById('quanta_tris_di_suppli').value='';
+    const notesuppli = document.getElementById('note_tris_di_suppli').value;
+    document.getElementById('note_tris_di_suppli').value='';
     const pdg = document.getElementById('quanta_primo_del_giorno').value;
     document.getElementById('quanta_primo_del_giorno').value='';
     const notepdg = document.getElementById('note_primo_del_giorno').value;
     document.getElementById('note_primo_del_giorno').value='';
-    const primo = document.getElementById('quanta_pasta_alla_don_bosco').value;
-    document.getElementById('quanta_pasta_alla_don_bosco').value='';
-    const noteprimo = document.getElementById('note_pasta_alla_don_bosco').value;
-    document.getElementById('note_pasta_alla_don_bosco').value='';
-    const dolce = document.getElementById('quanta_dolce').value;
-    document.getElementById('quanta_dolce').value='';
-    const notedolce = document.getElementById('note_dolce').value;
-    document.getElementById('note_dolce').value='';
-    const carne = document.getElementById('quanta_carne').value;
-    document.getElementById('quanta_carne').value='';
-    const notecarne = document.getElementById('note_carne').value;
-    document.getElementById('note_carne').value='';
+    const primo = document.getElementById('quanta_pasta_al_pomodoro').value;
+    document.getElementById('quanta_pasta_al_pomodoro').value='';
+    const noteprimo = document.getElementById('note_pasta_al_pomodoro').value;
+    document.getElementById('note_pasta_al_pomodoro').value='';
+    const gm = document.getElementById('quanta_grigliata_mista').value;
+    document.getElementById('quanta_grigliata_mista').value='';
+    const notegm = document.getElementById('note_grigliata_mista').value;
+    document.getElementById('note_grigliata_mista').value='';
+    const bra = document.getElementById('quanta_braciola').value;
+    document.getElementById('quanta_braciola').value='';
+    const notebraciola = document.getElementById('note_braciola').value;
+    document.getElementById('note_braciola').value='';
+    const sals = document.getElementById('quanta_porzione_di_salsicce').value;
+    document.getElementById('quanta_porzione_di_salsicce').value='';
+    const notesals = document.getElementById('note_porzione_di_salsicce').value;
+    document.getElementById('note_porzione_di_salsicce').value='';
+    const verd = document.getElementById('quanta_verdura_cotta').value;
+    document.getElementById('quanta_verdura_cotta').value='';
+    const noteverd = document.getElementById('note_verdura_cotta').value;
+    document.getElementById('note_verdura_cotta').value='';
+    const pat = document.getElementById('quanta_patate_fritte').value;
+    document.getElementById('quanta_patate_fritte').value='';
+    const notepat = document.getElementById('note_patate_fritte').value;
+    document.getElementById('note_patate_fritte').value='';
+    const pizza1 = document.getElementById('quanta_pizza_1_ingrediente').value;
+    document.getElementById('quanta_pizza_1_ingrediente').value='';
+    const notepizza1 = document.getElementById('note_pizza_1_ingrediente').value;
+    document.getElementById('note_pizza_1_ingrediente').value='';
+    const pizza2 = document.getElementById('quanta_pizza_2_ingredienti').value;
+    document.getElementById('quanta_pizza_2_ingredienti').value='';
+    const notepizza2 = document.getElementById('note_pizza_2_ingredienti').value;
+    document.getElementById('note_pizza_2_ingredienti').value='';
+    const piznut = document.getElementById('quanta_pizzola_con_nutella').value;
+    document.getElementById('quanta_pizzola_con_nutella').value='';
+    const notepiznut = document.getElementById('note_pizzola_con_nutella').value;
+    document.getElementById('note_pizzola_con_nutella').value='';
+    const pizzola = document.getElementById('quanta_pizzola_dolce/salata').value;
+    document.getElementById('quanta_pizzola_dolce/salata').value='';
+    const notepizzola = document.getElementById('note_pizzola_dolce/salata').value;
+    document.getElementById('note_pizzola_dolce/salata').value='';
     const sconto_perc = document.getElementById('sconto_perc').value;
     document.getElementById('sconto_perc').value='';
     const sconto_netto = document.getElementById('sconto_netto').value;
@@ -53,8 +93,14 @@ function sendPrivateMessage() {
 
     privateStompClient.send("/app/private", {},
         JSON.stringify({'nomeTav':nome,'numTav':num, 'persTav':persone,
-            'cameriere':cameriere, 'primo del giorno':pdg, 'pasta alla don bosco':primo, 'carne':carne, 'dolce':dolce,
-            'note primo del giorno':notepdg,'note pasta alla don bosco':noteprimo, 'note dolce':notedolce, 'note carne':notecarne,
+            'cameriere':cameriere,'antipasto di campomaggiore':adc,'note antipasto di campomaggiore':noteadc,'bruschette miste':bm,
+            'note bruschette miste':notebm,'tris di suppli':suppli,'note tris di suppli':notesuppli, 'primo del giorno':pdg,
+            'note primo del giorno':notepdg,'pasta al pomodoro':primo, 'note pasta al pomodoro':noteprimo, 'grigliata mista':gm,
+            'note grigliata mista':notegm, 'braciola':bra, 'note braciola':notebraciola, 'porzione di salsicce':sals,
+            'note porzione di salsicce':notesals, 'verdura cotta':verd, 'note verdura cotta':noteverd, 'patate fritte':pat,
+            'note patate fritte':notepat, 'pizza 1 ingrediente':pizza1, 'note pizza 1 ingrediente':notepizza1,
+            'pizza 2 ingredienti':pizza2, 'note pizza 2 ingredienti':notepizza2, 'pizzola con nutella':piznut,
+            'note pizzola con nutella':notepiznut, 'pizzola dolce/salata':pizzola, 'note pizzola dolce/salata':notepizzola,
             'sconto_perc':sconto_perc, 'sconto_netto':sconto_netto}));
 }
 function sendPrivateMessage2() {

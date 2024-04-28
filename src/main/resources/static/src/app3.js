@@ -49,7 +49,7 @@ function show(message) {
     let response;
     if(message.nomeTavolo != null) {
         response = document.getElementById('tabella');
-        const row = response.insertRow(0);
+        const row = response.insertRow(response.rows.length);
         const casella=row.insertCell(0);
         const tavolo=row.insertCell(1);
         const nome=row.insertCell(2);

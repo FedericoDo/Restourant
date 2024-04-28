@@ -20,9 +20,10 @@ public class CassaCommand {
 
     private final Prezzario prezzario = new Prezzario();
     private final Map<String, String[]> piatti=new HashMap<>();
-    private final String[] primi={"primo del giorno","pasta alla don bosco"};
-    private final String[] secondi={"carne"};
-    private final String[] dolci={"dolce"};
+    private final String[] antipasti={"antipasto di campomaggiore","bruschette miste","tris di suppli"};
+    private final String[] primi={"primo del giorno","pasta al pomodoro"};
+    private final String[] secondi={"grigliata mista","braciola","porzione di salsicce","verdura cotta","patate fritte","pizza 1 ingrediente","pizza 2 ingredienti"};
+    private final String[] dolci={"pizzola con nutella","pizzola dolce/salata"};
 
     public void execute(Map<String,String> allParams) {
         Ordine ordine = new Ordine();
@@ -57,6 +58,7 @@ public class CassaCommand {
         simpMessagingTemplate.convertAndSendToUser("cassa", "/specific", message);
         //TODO: MODIFICA QUANDO AVRAI MENU
 
+        piatti.put("antipasti",antipasti);
         piatti.put("primi",primi);
         piatti.put("secondi",secondi);
         piatti.put("dolci",dolci);

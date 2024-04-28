@@ -28,7 +28,7 @@ function show(message) {
     var response;
     if(message.nomeTavolo != null) {
         response = document.getElementById('tabella');
-        var row = response.insertRow(0);
+        var row = response.insertRow(response.rows.length);
         let casella=row.insertCell(0);
         let persone=row.insertCell(1);
         let tavolo=row.insertCell(2);

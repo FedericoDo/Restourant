@@ -36,7 +36,7 @@ public class SimpleController {
 
     private final Prezzario prezzario = new Prezzario();
 
-    private final String[] reparti={"primi","secondi","dolci"};
+    private final String[] reparti={"antipasti","primi","secondi","dolci"};
 
     @GetMapping("/")
     public String homePage() {
