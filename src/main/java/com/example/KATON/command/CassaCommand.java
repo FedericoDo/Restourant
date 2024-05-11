@@ -1,9 +1,6 @@
 package com.example.KATON.command;
 
 import com.example.KATON.model.*;
-import com.example.KATON.repository.CameriereRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Component;
 
 import java.text.DecimalFormat;
@@ -11,21 +8,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Component
-public class CassaCommand {
-
-    @Autowired
-    private CameriereRepository cameriereRepository;
-    @Autowired
-    private SimpMessagingTemplate simpMessagingTemplate;
+public class CassaCommand extends BaseCommand{
 
     private final Prezzario prezzario = new Prezzario();
     private final Map<String, String[]> piatti=new HashMap<>();
-    private final String[] antipasti={"antipasto di campomaggiore","bruschette miste","tris di suppli"};
+    private final String[] antipasti={"antipasto di campomaggiore","tris di bruschette","tris di suppli"};
     private final String[] primi={"primo del giorno","pasta al pomodoro"};
-    private final String[] secondi={"grigliata mista","braciola","porzione di salsicce","verdura cotta","patate fritte","pizza 1 ingrediente","pizza 2 ingredienti"};
+    private final String[] secondi={"grigliata mista","braciola","tris di salsicce","verdura cotta","patate fritte","pizza 1 ingrediente","pizza 2 ingredienti"};
     private final String[] dolci={"pizzola con nutella","pizzola dolce/salata"};
 
-    public void execute(Map<String,String> allParams) {
+    public double execute(Map<String,String> allParams) {
         Ordine ordine = new Ordine();
         Cameriere cameriere = cameriereRepository.getCameriereByNome(allParams.get("cameriere"));
         ordine.setNomeTavolo(allParams.get("nomeTav"));
@@ -42,11 +34,7 @@ public class CassaCommand {
 
         Ordine1 res = new Ordine1(ordine);
         simpMessagingTemplate.convertAndSendToUser(cameriere.getNome(),"/specific", res);
-        double tot=0;
-        for (Piatto p:res.getPiatti()){
-            tot+=p.getPrezzo()*p.getQuantity();
-        }
-        tot+=res.getPersone()*1.5;
+        double tot=ordine.getTotale();
         if((allParams.get("sconto_netto")!=null)&&(!allParams.get("sconto_netto").isEmpty())) {
             tot-=Double.parseDouble(allParams.get("sconto_netto"));
         }
@@ -80,5 +68,6 @@ public class CassaCommand {
             if(!ordine1.getPiatti().isEmpty())
                 simpMessagingTemplate.convertAndSendToUser(d, "/specific", new Ordine1(ordine1));
         }
+        return tot;
     }
 }

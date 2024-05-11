@@ -93,11 +93,11 @@ function sendPrivateMessage() {
 
     privateStompClient.send("/app/private", {},
         JSON.stringify({'nomeTav':nome,'numTav':num, 'persTav':persone,
-            'cameriere':cameriere,'antipasto di campomaggiore':adc,'note antipasto di campomaggiore':noteadc,'bruschette miste':bm,
-            'note bruschette miste':notebm,'tris di suppli':suppli,'note tris di suppli':notesuppli, 'primo del giorno':pdg,
+            'cameriere':cameriere,'antipasto di campomaggiore':adc,'note antipasto di campomaggiore':noteadc,'tris di bruschette':bm,
+            'note tris di bruschette':notebm,'tris di suppli':suppli,'note tris di suppli':notesuppli, 'primo del giorno':pdg,
             'note primo del giorno':notepdg,'pasta al pomodoro':primo, 'note pasta al pomodoro':noteprimo, 'grigliata mista':gm,
-            'note grigliata mista':notegm, 'braciola':bra, 'note braciola':notebraciola, 'porzione di salsicce':sals,
-            'note porzione di salsicce':notesals, 'verdura cotta':verd, 'note verdura cotta':noteverd, 'patate fritte':pat,
+            'note grigliata mista':notegm, 'braciola':bra, 'note braciola':notebraciola, 'tris di salsicce':sals,
+            'note tris di salsicce':notesals, 'verdura cotta':verd, 'note verdura cotta':noteverd, 'patate fritte':pat,
             'note patate fritte':notepat, 'pizza 1 ingrediente':pizza1, 'note pizza 1 ingrediente':notepizza1,
             'pizza 2 ingredienti':pizza2, 'note pizza 2 ingredienti':notepizza2, 'pizzola con nutella':piznut,
             'note pizzola con nutella':notepiznut, 'pizzola dolce/salata':pizzola, 'note pizzola dolce/salata':notepizzola,
@@ -105,6 +105,9 @@ function sendPrivateMessage() {
 }
 function sendPrivateMessage2() {
     privateStompClient.send("/app/print", {},"stampa");
+}
+function sendPrivateMessage3() {
+    privateStompClient.send("/app/total", {},"stampa");
 }
 
 function show(message) {

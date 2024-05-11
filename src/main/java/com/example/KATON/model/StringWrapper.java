@@ -10,19 +10,13 @@ import lombok.Setter;
 @Getter
 @Setter
 public class StringWrapper {
+    @Setter
+    @Getter
     @Id
     @GeneratedValue
     private Long id;
 
     private String valore;
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
-    }
 
     public StringWrapper(String value) {
         this.valore = value;

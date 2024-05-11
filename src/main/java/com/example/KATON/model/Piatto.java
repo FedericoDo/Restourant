@@ -15,6 +15,8 @@ public class Piatto  {
     private String nome;
     private double prezzo;
     private String note;
+    @Getter
+    @Setter
     @Id
     @GeneratedValue
     private Long id;
@@ -25,25 +27,8 @@ public class Piatto  {
         this.quantity = quantity;
         this.note = note;
     }
-
-   /* public String[] getListaPiatti(){
-        String[] res = new String[nomePiatto.values().length];
-        int cont=0;
-        for(nomePiatto p: nomePiatto.values()){
-            res[cont]=p.toString();
-            cont++;
-        }
-        return res;
-    }*/
     public Piatto() {
         super();
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
-    }
 }

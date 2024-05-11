@@ -1,13 +1,13 @@
 package com.example.KATON.model;
 
 import jakarta.persistence.*;
-import lombok.ToString;
-import org.hibernate.annotations.ManyToAny;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+@Setter
+@Getter
 @Entity
 public class Ordine {
 
@@ -28,78 +28,22 @@ public class Ordine {
 	private List<Piatto> piatti;
 
 
-
-	public int getNumeroTavolo() {
-		return numeroTavolo;
-	}
-
-	public void setNumeroTavolo(int tavolo) {
-		this.numeroTavolo = tavolo;
-	}
-
-	public String getServitore() {
-		return servitore;
-	}
-
-	public void setServitore(String s) {
-		this.servitore = s;
-	}
-
-	public String getNomeTavolo() {
-		return nomeTavolo;
-	}
-
-	public void setNomeTavolo(String nomeTavolo) {
-		this.nomeTavolo = nomeTavolo;
-	}
-
-	public int getPersone() {
-		return persone;
-	}
-
-	public void setPersone(int persone) {
-		this.persone = persone;
-	}
-
-	public List<Piatto> getOrdine() {
+    public List<Piatto> getOrdine() {
 		return piatti;
 	}
 
 	public Ordine() {
 		super();
-		piatti = new ArrayList<Piatto>();
+		piatti = new ArrayList<>();
 		this.completato = false;
 	}
 
-	public boolean isCompletato() {
-		return completato;
-	}
-
-	public void setCompletato(boolean completato) {
-		this.completato = completato;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public Cameriere getCameriere() {
-		return cameriere;
-	}
-
-	public void setCameriere(Cameriere cameriere) {
-		this.cameriere = cameriere;
-	}
-
-	public List<Piatto> getPiatti() {
-		return piatti;
-	}
-
-	public void setPiatti(List<Piatto> piatti) {
-		this.piatti = piatti;
+    public double getTotale(){
+		double tot=0;
+		for (Piatto p:piatti){
+			tot+=p.getPrezzo()*p.getQuantity();
+		}
+		tot+=persone*1.0;
+		return tot;
 	}
 }
