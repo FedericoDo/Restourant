@@ -23,7 +23,7 @@ Nascondi menu <input type="checkBox" onchange="HideMenu()"/>
       <option th:each="c:${camerieri}" th:text="${c.getValore()}" th:value="${c.getValore().replaceAll('-\d+','')}"></option>
     </select>
     <div th:each="piatto:${piatti}">
-        <input type="text" readonly th:value="${piatto}" style="border:none;">
+        <input type="text" readonly th:value="${piatto}" style="border:none;" size="24">
         Quantit&agrave:<input type="checkbox" th:id="${piatto.replaceAll(' ','_')}" onchange="prova(this.id)"/>
         <input type="number" th:id="'quanta_'+${piatto.replaceAll(' ','_')}" style="visibility:hidden"/>
         Note:<input type="checkbox" th:id="${piatto.replaceAll(' ','_')}" onchange="note(this.id)"/>

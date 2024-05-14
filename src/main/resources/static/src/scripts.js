@@ -31,8 +31,8 @@ function hide(className) {
 
 
 }
-function fill(message){
-    const temp = document.getElementById("piatti");
+function fill(message,timestamp){
+    const temp = document.getElementById("piatti_"+timestamp);
     for( let o = 0; o<message.piatti.length; o++){
         row=temp.insertRow(0);
         let nomePiatto=row.insertCell(0);

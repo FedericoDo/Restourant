@@ -34,6 +34,8 @@ public class SimpleController {
     private PrintToUserCommand printToUserCommand;
     @Autowired
     GoToCassaCommand goToCassaCommand;
+    @Autowired
+    ResocontoCommand resocontoCommand;
     private double total =0;
 
     @GetMapping("/")
@@ -69,7 +71,8 @@ public class SimpleController {
         newUserCommand.execute(allParams);
     }
     @MessageMapping("/total")
-    public void totale(){
+    public void totale() throws IOException {
+        resocontoCommand.execute(total);
         DecimalFormat df = new DecimalFormat("#.##");
         StringWrapper message = new StringWrapper("totale: "+df.format(total)+"€");
         simpMessagingTemplate.convertAndSendToUser("cassa", "/specific", message);

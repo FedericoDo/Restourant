@@ -4,6 +4,7 @@ import com.example.KATON.model.*;
 import org.springframework.stereotype.Component;
 
 import java.text.DecimalFormat;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,7 +29,16 @@ public class CassaCommand extends BaseCommand{
                 ordine.getPiatti().add(new Piatto(g,Integer.parseInt(allParams.get(g.toLowerCase())),prezzario.priceOf(g),allParams.get("note "+g.toLowerCase())));
             }
         }
+        StringWrapper trovati = new StringWrapper("0");
+        cameriereRepository.findAll().forEach(c ->{
+            if(Arrays.stream(reparti).noneMatch(s->s.equals(c.getNome()))){
+                c.getOrdini().stream().filter(o -> o.getNomeTavolo().split("-")[0].equals(ordine.getNomeTavolo())).forEach(o -> trovati.setValore(String.valueOf(Integer.parseInt(trovati.getValore())+1)));
+            }
+        });
         ordine.setCameriere(cameriere);
+        if(!trovati.getValore().equals("0")) {
+            ordine.setNomeTavolo(ordine.getNomeTavolo() + "-" + trovati.getValore());
+        }
         cameriere.getOrdini().add(ordine);
         cameriereRepository.save(cameriere);
 
@@ -57,7 +67,7 @@ public class CassaCommand extends BaseCommand{
                 if((allParams.get(c)!=null) && (!(allParams.get(c.toLowerCase()).isEmpty()))&& (!(allParams.get(c.toLowerCase()).isEmpty()))) {
                     ordine1.getPiatti().add(new Piatto(c, Integer.parseInt(allParams.get(c)), prezzario.priceOf(c), allParams.get("note "+c.toLowerCase())));
                     Cameriere cameriere1 = cameriereRepository.getCameriereByNome(d);
-                    ordine1.setNomeTavolo(allParams.get("nomeTav"));
+                    ordine1.setNomeTavolo(ordine.getNomeTavolo());
                     ordine1.setNumeroTavolo(Integer.parseInt(allParams.get("numTav")));
                     ordine1.setCameriere(cameriere1);
                     ordine1.setServitore(allParams.get("cameriere"));
@@ -65,8 +75,9 @@ public class CassaCommand extends BaseCommand{
                     cameriereRepository.save(cameriere1);
                 }
             }
-            if(!ordine1.getPiatti().isEmpty())
+            if(!ordine1.getPiatti().isEmpty()) {
                 simpMessagingTemplate.convertAndSendToUser(d, "/specific", new Ordine1(ordine1));
+            }
         }
         return tot;
     }

@@ -64,8 +64,10 @@ function show(message) {
         piatti.style.width="40%";
         tavolo.innerHTML=message.numeroTavolo;
         nome.innerHTML=message.nomeTavolo;
-        piatti.innerHTML="<table id='piatti'></table>";
+        var timestamp = new Date().getTime();
+        console.log(timestamp);
+        piatti.innerHTML="<table id='piatti_"+timestamp+"'></table>";
         cameriere.innerHTML=message.servitore;
-        fill(message);
+        fill(message, timestamp);
     }
 }

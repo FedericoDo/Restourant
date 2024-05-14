@@ -43,7 +43,9 @@ function show(message) {
         nome.style.width="15%";
         nome.innerHTML=message.nomeTavolo;
         piatti.style.width="40%";
-        piatti.innerHTML="<table id='piatti'></table>";
-        fill(message);
+        var timestamp = new Date().getTime();
+        console.log(timestamp);
+        piatti.innerHTML = "<table id='piatti_"+timestamp+"'></table>";
+        fill(message, timestamp);
     }
 }
