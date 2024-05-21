@@ -72,6 +72,38 @@ function sendPrivateMessage() {
     document.getElementById('quanta_pizzola_dolce/salata').value='';
     const notepizzola = document.getElementById('note_pizzola_dolce/salata').value;
     document.getElementById('note_pizzola_dolce/salata').value='';
+    const acqua1 = document.getElementById('quanta_acqua_1Lt').value;
+    document.getElementById('quanta_acqua_1Lt').value='';
+    const noteAcqua1 = document.getElementById('note_acqua_1Lt').value;
+    document.getElementById('note_acqua_1Lt').value='';
+    const acqua2 = document.getElementById('quanta_acqua_0.5Lt').value;
+    document.getElementById('quanta_acqua_0.5Lt').value='';
+    const noteAcqua2 = document.getElementById('note_acqua_0.5Lt').value;
+    document.getElementById('note_acqua_0.5Lt').value='';
+    const vino1 = document.getElementById('quanta_vino_1Lt').value;
+    document.getElementById('quanta_vino_1Lt').value='';
+    const noteVino1 = document.getElementById('note_vino_1Lt').value;
+    document.getElementById('note_vino_1Lt').value='';
+    const vino2 = document.getElementById('quanta_vino_0.5Lt').value;
+    document.getElementById('quanta_vino_0.5Lt').value='';
+    const noteVino2 = document.getElementById('note_vino_0.5Lt').value;
+    document.getElementById('note_vino_0.5Lt').value='';
+    const vino3 = document.getElementById('quanta_vino_in_bottiglia').value;
+    document.getElementById('quanta_vino_in_bottiglia').value='';
+    const noteVino3 = document.getElementById('note_vino_in_bottiglia').value;
+    document.getElementById('note_vino_in_bottiglia').value='';
+    const bibita = document.getElementById('quanta_bibita').value;
+    document.getElementById('quanta_bibita').value='';
+    const noteBibita = document.getElementById('note_bibita').value;
+    document.getElementById('note_bibita').value='';
+    const birra1 = document.getElementById('quanta_birra_piccola').value;
+    document.getElementById('quanta_birra_piccola').value='';
+    const noteBirra1 = document.getElementById('note_birra_piccola').value;
+    document.getElementById('note_birra_piccola').value='';
+    const birra2 = document.getElementById('quanta_birra_grande').value;
+    document.getElementById('quanta_birra_grande').value='';
+    const noteBirra2 = document.getElementById('note_birra_grande').value;
+    document.getElementById('note_birra_grande').value='';
     const sconto_perc = document.getElementById('sconto_perc').value;
     document.getElementById('sconto_perc').value='';
     const sconto_netto = document.getElementById('sconto_netto').value;
@@ -92,15 +124,29 @@ function sendPrivateMessage() {
     // var elementi = document.querySelectorAll('input[type="number"]')
 
     privateStompClient.send("/app/private", {},
-        JSON.stringify({'nomeTav':nome,'numTav':num, 'persTav':persone,
-            'cameriere':cameriere,'antipasto di campomaggiore':adc,'note antipasto di campomaggiore':noteadc,'tris di bruschette':bm,
-            'note tris di bruschette':notebm,'tris di suppli':suppli,'note tris di suppli':notesuppli, 'primo del giorno':pdg,
-            'note primo del giorno':notepdg,'pasta al pomodoro':primo, 'note pasta al pomodoro':noteprimo, 'grigliata mista':gm,
-            'note grigliata mista':notegm, 'braciola':bra, 'note braciola':notebraciola, 'tris di salsicce':sals,
-            'note tris di salsicce':notesals, 'verdura cotta':verd, 'note verdura cotta':noteverd, 'patate fritte':pat,
-            'note patate fritte':notepat, 'pizza 1 ingrediente':pizza1, 'note pizza 1 ingrediente':notepizza1,
-            'pizza 2 ingredienti':pizza2, 'note pizza 2 ingredienti':notepizza2, 'pizzola con nutella':piznut,
-            'note pizzola con nutella':notepiznut, 'pizzola dolce/salata':pizzola, 'note pizzola dolce/salata':notepizzola,
+        JSON.stringify({'nomeTav':nome,'numTav':num, 'persTav':persone, 'cameriere':cameriere,
+            'antipasto di campomaggiore':adc,'note antipasto di campomaggiore':noteadc,
+            'tris di bruschette':bm, 'note tris di bruschette':notebm,
+            'tris di suppli':suppli, 'note tris di suppli':notesuppli,
+            'primo del giorno':pdg,'note primo del giorno':notepdg,
+            'pasta al pomodoro':primo, 'note pasta al pomodoro':noteprimo,
+            'grigliata mista':gm, 'note grigliata mista':notegm,
+            'braciola':bra, 'note braciola':notebraciola, 
+            'tris di salsicce':sals, 'note tris di salsicce':notesals,
+            'verdura cotta':verd, 'note verdura cotta':noteverd, 
+            'patate fritte':pat, 'note patate fritte':notepat,
+            'pizza 1 ingrediente':pizza1, 'note pizza 1 ingrediente':notepizza1,
+            'pizza 2 ingredienti':pizza2, 'note pizza 2 ingredienti':notepizza2, 
+            'pizzola con nutella':piznut, 'note pizzola con nutella':notepiznut,
+            'pizzola dolce/salata':pizzola, 'note pizzola dolce/salata':notepizzola,
+            'acqua 1Lt':acqua1, 'note acqua 1Lt':noteAcqua1,
+            'acqua 0.5Lt':acqua2, 'note acqua 0.5Lt':noteAcqua2,
+            'vino 1Lt':vino1, 'note vino 1Lt':noteVino1,
+            'vino 0.5Lt':vino2, 'note vino 0.5Lt':noteVino2,
+            'vino in bottiglia':vino3, 'note vino in bottiglia':noteVino3,
+            'bibita':bibita, 'note bibita':noteBibita,
+            'birra piccola':birra1, 'note birra piccola':noteBirra1,
+            'birra grande':birra2, 'note birra grande':noteBirra2,
             'sconto_perc':sconto_perc, 'sconto_netto':sconto_netto}));
 }
 function sendPrivateMessage2() {

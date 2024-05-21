@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import java.text.DecimalFormat;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,7 +14,7 @@ public class CassaCommand extends BaseCommand{
 
     private final Prezzario prezzario = new Prezzario();
     private final Map<String, String[]> piatti=new HashMap<>();
-    private final String[] antipasti={"antipasto di campomaggiore","tris di bruschette","tris di suppli"};
+    private final String[] antipasti={"antipasto di campomaggiore","tris di bruschette","tris di suppli","acqua 1Lt","acqua 0.5Lt","vino 0.5Lt","vino 1Lt","vino in bottiglia","bibita","birra piccola","birra grande"};
     private final String[] primi={"primo del giorno","pasta al pomodoro"};
     private final String[] secondi={"grigliata mista","braciola","tris di salsicce","verdura cotta","patate fritte","pizza 1 ingrediente","pizza 2 ingredienti"};
     private final String[] dolci={"pizzola con nutella","pizzola dolce/salata"};
@@ -25,10 +26,11 @@ public class CassaCommand extends BaseCommand{
         ordine.setPersone(Integer.parseInt(allParams.get("persTav")));
         ordine.setNumeroTavolo(Integer.parseInt(allParams.get("numTav")));
         for(String g: prezzario.getTable().keySet()){
-            if(!(allParams.get(g.toLowerCase()).isEmpty())||!(allParams.get(g.toLowerCase()).isEmpty())) {
+            if((allParams.get(g)!=null) && !(allParams.get(g).isEmpty())) {
                 ordine.getPiatti().add(new Piatto(g,Integer.parseInt(allParams.get(g.toLowerCase())),prezzario.priceOf(g),allParams.get("note "+g.toLowerCase())));
             }
         }
+        Collections.reverse(ordine.getPiatti());
         StringWrapper trovati = new StringWrapper("0");
         cameriereRepository.findAll().forEach(c ->{
             if(Arrays.stream(reparti).noneMatch(s->s.equals(c.getNome()))){
@@ -64,7 +66,7 @@ public class CassaCommand extends BaseCommand{
         for(String d:piatti.keySet()) {
             Ordine ordine1 = new Ordine();
             for(String c:piatti.get(d)) {
-                if((allParams.get(c)!=null) && (!(allParams.get(c.toLowerCase()).isEmpty()))&& (!(allParams.get(c.toLowerCase()).isEmpty()))) {
+                if((allParams.get(c)!=null) && (!(allParams.get(c).isEmpty()))) {
                     ordine1.getPiatti().add(new Piatto(c, Integer.parseInt(allParams.get(c)), prezzario.priceOf(c), allParams.get("note "+c.toLowerCase())));
                     Cameriere cameriere1 = cameriereRepository.getCameriereByNome(d);
                     ordine1.setNomeTavolo(ordine.getNomeTavolo());
