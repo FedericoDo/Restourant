@@ -19,5 +19,6 @@ public class BaseCommand {
 
     @Autowired
     public SecurityConfig securityConfig;
+    boolean mock = true;
 
 }
