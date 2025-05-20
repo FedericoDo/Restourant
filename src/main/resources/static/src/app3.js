@@ -23,7 +23,7 @@ function changeStatus(className) {
     privateStompClient.send("/app/cambia", {}, JSON.stringify({'cameriere': cameriere, 'tavolo': tavolo}));
 }
 
-function sendPrivateMessage() {
+/*function sendPrivateMessage() {
     const nome = document.getElementById('nome').value;
     const num = document.getElementById('num').value;
     const persone = document.getElementById('persone').value;
@@ -40,10 +40,12 @@ function sendPrivateMessage() {
     privateStompClient.send("/app/private", {},
         JSON.stringify({'nomeTav':nome,'numTav':num, 'persTav':persone,
         'cameriere':cameriere, 'pasta':pasta, 'carne':carne, 'dolce':dolce}));
-}
+}*/
+/*
 function sendPrivateMessage2() {
     privateStompClient.send("/app/print", {},"stampa");
 }
+*/
 
 function show(message) {
     let response;

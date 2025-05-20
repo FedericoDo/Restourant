@@ -11,9 +11,9 @@ public class CassaCommand extends BaseCommand{
 
     private final Prezzario prezzario = new Prezzario();
     private final Map<String, String[]> piatti=new HashMap<>();
-    private final String[] antipasti={"antipasto di campomaggiore","tris di bruschette","tris di suppli","acqua 1Lt","acqua 0.5Lt","vino 0.5Lt","vino 1Lt","vino in bottiglia","bibita","birra piccola","birra grande"};
-    private final String[] primi={"primo del giorno","pasta al pomodoro"};
-    private final String[] secondi={"grigliata mista","braciola","tris di salsicce","verdura cotta","patate fritte","pizza 1 ingrediente","pizza 2 ingredienti"};
+    private final String[] antipasti={"antipasto di campomaggiore","tris di bruschette","tris di suppli","acqua 1Lt","acqua 0.5Lt","vino 0.5Lt","vino 1Lt","vino in bottiglia","bibita","birra piccola","birra grande", "piatti senza glutine"};
+    private final String[] primi={"primo del giorno","ciriole alla ternana"};
+    private final String[] secondi={"grigliata mista","braciola","tris di salsicce","verdura cotta","patate fritte","pizza 1 ingrediente","pizza 2 ingredienti", "pizza bianca", "agnello", "vitella"};
     private final String[] dolci={"pizzola con nutella","pizzola dolce/salata"};
 
     public double execute(Map<String,String> allParams) {

@@ -32,10 +32,10 @@ function sendPrivateMessage() {
     document.getElementById('quanta_primo_del_giorno').value='';
     const notepdg = document.getElementById('note_primo_del_giorno').value;
     document.getElementById('note_primo_del_giorno').value='';
-    const primo = document.getElementById('quanta_pasta_al_pomodoro').value;
-    document.getElementById('quanta_pasta_al_pomodoro').value='';
-    const noteprimo = document.getElementById('note_pasta_al_pomodoro').value;
-    document.getElementById('note_pasta_al_pomodoro').value='';
+    const primo = document.getElementById('quanta_ciriole_alla_ternana').value;
+    document.getElementById('quanta_ciriole_alla_ternana').value='';
+    const noteprimo = document.getElementById('note_ciriole_alla_ternana').value;
+    document.getElementById('note_ciriole_alla_ternana').value='';
     const gm = document.getElementById('quanta_grigliata_mista').value;
     document.getElementById('quanta_grigliata_mista').value='';
     const notegm = document.getElementById('note_grigliata_mista').value;
@@ -44,6 +44,14 @@ function sendPrivateMessage() {
     document.getElementById('quanta_braciola').value='';
     const notebraciola = document.getElementById('note_braciola').value;
     document.getElementById('note_braciola').value='';
+    const agnello = document.getElementById('quanta_agnello').value;
+    document.getElementById('quanta_agnello').value='';
+    const noteagnello = document.getElementById('note_agnello').value;
+    document.getElementById('note_agnello').value='';
+    const vitella = document.getElementById('quanta_vitella').value;
+    document.getElementById('quanta_vitella').value='';
+    const notevitella = document.getElementById('note_vitella').value;
+    document.getElementById('note_vitella').value='';
     const sals = document.getElementById('quanta_tris_di_salsicce').value;
     document.getElementById('quanta_tris_di_salsicce').value='';
     const notesals = document.getElementById('note_tris_di_salsicce').value;
@@ -92,6 +100,10 @@ function sendPrivateMessage() {
     document.getElementById('quanta_vino_in_bottiglia').value='';
     const noteVino3 = document.getElementById('note_vino_in_bottiglia').value;
     document.getElementById('note_vino_in_bottiglia').value='';
+    const celiaco = document.getElementById('quanta_piatti_senza_glutine').value;
+    document.getElementById('quanta_piatti_senza_glutine').value='';
+    const noteceliaco = document.getElementById('note_piatti_senza_glutine').value;
+    document.getElementById('note_piatti_senza_glutine').value='';
     const bibita = document.getElementById('quanta_bibita').value;
     document.getElementById('quanta_bibita').value='';
     const noteBibita = document.getElementById('note_bibita').value;
@@ -129,9 +141,11 @@ function sendPrivateMessage() {
             'tris di bruschette':bm, 'note tris di bruschette':notebm,
             'tris di suppli':suppli, 'note tris di suppli':notesuppli,
             'primo del giorno':pdg,'note primo del giorno':notepdg,
-            'pasta al pomodoro':primo, 'note pasta al pomodoro':noteprimo,
+            'ciriole alla ternana':primo, 'note ciriole alla ternana':noteprimo,
             'grigliata mista':gm, 'note grigliata mista':notegm,
-            'braciola':bra, 'note braciola':notebraciola, 
+            'braciola':bra, 'note braciola':notebraciola,
+            'agnello':agnello, 'note agnello':noteagnello,
+            'vitella':vitella, 'note vitella':notevitella,
             'tris di salsicce':sals, 'note tris di salsicce':notesals,
             'verdura cotta':verd, 'note verdura cotta':noteverd, 
             'patate fritte':pat, 'note patate fritte':notepat,
@@ -144,6 +158,7 @@ function sendPrivateMessage() {
             'vino 1Lt':vino1, 'note vino 1Lt':noteVino1,
             'vino 0.5Lt':vino2, 'note vino 0.5Lt':noteVino2,
             'vino in bottiglia':vino3, 'note vino in bottiglia':noteVino3,
+            'piatti senza glutine':celiaco, 'note piatti senza glutine':noteceliaco,
             'bibita':bibita, 'note bibita':noteBibita,
             'birra piccola':birra1, 'note birra piccola':noteBirra1,
             'birra grande':birra2, 'note birra grande':noteBirra2,
